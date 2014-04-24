@@ -10,13 +10,18 @@ import com.jjoe64.graphview.GraphView;
 import com.jjoe64.graphview.GraphViewSeries;
 import com.jjoe64.graphview.LineGraphView;
 
+import org.androidannotations.annotations.AfterViews;
+import org.androidannotations.annotations.EActivity;
+import org.androidannotations.annotations.ViewById;
+
+@EActivity(R.layout.activity_main)
 public class MainActivity extends Activity {
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+    @ViewById(R.id.graph1)
+    LinearLayout layout;
 
+    @AfterViews
+    void init() {
         GraphViewSeries exampleSeries = new GraphViewSeries(new GraphView.GraphViewData[]{
                 new GraphView.GraphViewData(1, 2.0d),
                 new GraphView.GraphViewData(2, 1.5d),
@@ -26,29 +31,6 @@ public class MainActivity extends Activity {
 
         GraphView graphView = new LineGraphView(this, "GraphViewDemo");
         graphView.addSeries(exampleSeries);
-        LinearLayout layout = (LinearLayout) findViewById(R.id.graph1);
         layout.addView(graphView);
     }
-
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.main, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-        if (id == R.id.action_settings) {
-            return true;
-        }
-        return super.onOptionsItemSelected(item);
-    }
-
 }

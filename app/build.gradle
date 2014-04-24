@@ -49,4 +49,5 @@ dependencies {
     compile 'com.android.support:support-v4:+'
     apt "org.androidannotations:androidannotations:$AAVersion"
     compile "org.androidannotations:androidannotations-api:$AAVersion"
+    compile 'com.github.eluleci:flatui:0.1.3'
 }

@@ -3,26 +3,26 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/DarkSlateGray"
+    android:background="@color/DarkGray"
     android:paddingBottom="@dimen/activity_vertical_margin"
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.candroid.app.MainActivity">
 
-    <LinearLayout
-        android:id="@+id/graph1"
-        android:layout_width="fill_parent"
-        android:layout_height="250dip"
-        android:orientation="vertical" />
-
     <com.cengalabs.flatui.views.FlatButton
-        android:id="@+id/button_turquoise"
+        android:id="@+id/button_pull_data"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="3dp"
         android:text="Click Me!"
         flatui:textAppearance="light"
         flatui:theme="Blood" />
+
+    <ListView
+        android:id="@+id/list"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_toRightOf="@id/button_pull_data" />
 
 </RelativeLayout>

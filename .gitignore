@@ -16,6 +16,9 @@ gen/
 local.properties
 
 # Windows thumbnail db
+Thumbs.db
+
+# OSX files
 .DS_Store
 
 # Eclipse project files
@@ -24,14 +27,17 @@ local.properties
 
 # Android Studio
 .idea
-#.idea/workspace.xml - uncomment this and comment/delete .idea if it better suit your needs
+#.idea/workspace.xml - remove # and delete .idea if it better suit your needs.
 .gradle
-/*/local.properties
-/*/out
-/*/*/build
-/*/*/production
+build/
+build/*
+
+.gradle
+/local.properties
+/.idea
+/.idea/workspace.xml
+.DS_Store
 *.iml
-*.iws
-*.ipr
-*~
-*.swp
+app/build
+app/build/
+app/build/*

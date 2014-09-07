@@ -1,6 +1,8 @@
 package com.candroid.app;
 
 import android.app.Activity;
+import android.os.Bundle;
+import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
@@ -15,32 +17,41 @@ import com.ximpleware.VTDNav;
 import com.ximpleware.XPathEvalException;
 import com.ximpleware.XPathParseException;
 
-import org.androidannotations.annotations.AfterViews;
-import org.androidannotations.annotations.Click;
-import org.androidannotations.annotations.EActivity;
-import org.androidannotations.annotations.ViewById;
-
 import java.io.IOException;
 import java.util.List;
 
-@EActivity(R.layout.activity_main)
 public class MainActivity extends Activity {
 
-    @ViewById(R.id.button_pull_data)
     FlatButton button;
 
-    @ViewById(R.id.list)
     ListView listView;
 
     List<Macro> macroList;
 
-    @AfterViews
-    void init() {
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+        button = (FlatButton) findViewById(R.id.button_pull_data);
+        listView = (ListView) findViewById(R.id.list);
         FlatUI.setDefaultTheme(FlatUI.DARK);
         FlatUI.setActionBarTheme(this, FlatUI.DARK, false, false);
+        init();
     }
 
-    @Click
+    private void init(){
+        setListeners();
+    }
+
+    private void setListeners(){
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                button_pull_data();
+            }
+        });
+    }
+
     void button_pull_data() {
         parseObjectPoolPULL();
     }

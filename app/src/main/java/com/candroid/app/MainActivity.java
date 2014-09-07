@@ -9,13 +9,7 @@ import android.widget.ListView;
 import com.candroid.app.util.XMLPullParserHandler;
 import com.cengalabs.flatui.FlatUI;
 import com.cengalabs.flatui.views.FlatButton;
-import com.ximpleware.AutoPilot;
-import com.ximpleware.NavException;
-import com.ximpleware.ParseException;
-import com.ximpleware.VTDGen;
-import com.ximpleware.VTDNav;
-import com.ximpleware.XPathEvalException;
-import com.ximpleware.XPathParseException;
+import com.crashlytics.android.Crashlytics;
 
 import java.io.IOException;
 import java.util.List;
@@ -31,6 +25,7 @@ public class MainActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Crashlytics.start(this);
         setContentView(R.layout.activity_main);
         button = (FlatButton) findViewById(R.id.button_pull_data);
         listView = (ListView) findViewById(R.id.list);
@@ -54,36 +49,6 @@ public class MainActivity extends Activity {
 
     void button_pull_data() {
         parseObjectPoolPULL();
-    }
-
-    private void parseObjectPoolVTD(String xmlString, byte[] data) {
-        VTDGen vg = new VTDGen();
-        vg.setDoc(data);
-        try {
-            vg.parse(true); //set namespace awareness to true
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-        VTDNav vn = vg.getNav();
-        AutoPilot ap = new AutoPilot(vn);
-        // Select namespace here; * matches any local name
-        //ap.selectElementNS("http://purl.org/dc/elements/1.1/", "*");
-        try {
-            ap.selectXPath("/objectpool/workingset");
-            while (ap.evalXPath() != -1) {
-                int val = vn.getAttrVal("name");
-                if (val != -1) {
-                    String name = vn.toNormalizedString(val);
-                    System.out.println("Name:" + name);
-                }
-            }
-        } catch (XPathParseException e) {
-            e.printStackTrace();
-        } catch (XPathEvalException e) {
-            e.printStackTrace();
-        } catch (NavException e) {
-            e.printStackTrace();
-        }
     }
 
     private void parseObjectPoolPULL() {

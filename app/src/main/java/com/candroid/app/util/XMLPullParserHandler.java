@@ -11,9 +11,6 @@ import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by johnshelley on 4/24/14.
- */
 public class XMLPullParserHandler {
 
     List<Macro> macros;

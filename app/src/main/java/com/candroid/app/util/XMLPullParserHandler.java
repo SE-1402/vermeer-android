@@ -1,6 +1,6 @@
 package com.candroid.app.util;
 
-import com.candroid.app.Macro;
+import com.candroid.app.dto.Macro;
 
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
@@ -48,7 +48,7 @@ public class XMLPullParserHandler {
                             // Add Macro to list
                             macros.add(macro);
                         } else if (tagName.equalsIgnoreCase("name")) {
-                            macro.setName(text);
+                            //macro.setName(text);
                         }
                         break;
                     default:

@@ -1,5 +1,4 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:flatui="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -10,19 +9,9 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.candroid.app.activities.MainActivity">
 
-    <com.cengalabs.flatui.views.FlatButton
-        android:id="@+id/button_pull_data"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="3dp"
-        android:text="Click Me!"
-        flatui:textAppearance="light"
-        flatui:theme="Blood" />
-
     <ListView
         android:id="@+id/list"
         android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:layout_toRightOf="@id/button_pull_data" />
+        android:layout_height="fill_parent" />
 
 </RelativeLayout>

@@ -5,15 +5,14 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
+import com.candroid.api.Client;
 import com.candroid.app.R;
 import com.candroid.app.dto.Macro;
 import com.candroid.app.dto.ObjectPool;
 import com.cengalabs.flatui.FlatUI;
-import com.cengalabs.flatui.views.FlatButton;
 import com.crashlytics.android.Crashlytics;
 
 import org.simpleframework.xml.Serializer;
@@ -64,7 +63,8 @@ public class MainActivity extends Activity {
         // Handle presses on the action bar items
         switch (item.getItemId()) {
             case R.id.action_start:
-                mockInitialData();
+                Client.startSocketClient();
+                //mockInitialData();
                 return true;
             default:
                 return super.onOptionsItemSelected(item);

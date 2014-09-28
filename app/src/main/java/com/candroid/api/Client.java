@@ -3,6 +3,7 @@ package com.candroid.api;
 
 import android.util.Log;
 
+import de.tavendo.autobahn.WebSocketConnection;
 import de.tavendo.autobahn.WebSocketException;
 import de.tavendo.autobahn.WebSocketHandler;
 
@@ -13,19 +14,15 @@ public class Client {
     private static final WebSocketConnection mConnection = new WebSocketConnection();
 
     public static void startSocketClient(){
-        final String wsuri = "ws://3168035b.ngrok.com";
+        final String wsuri = "ws://10.0.0.14:9000";
 
-        try{
-            mConnection.connect(wsuri, new WebSocket.ConnectionHandler() {
+        try {
+            mConnection.connect(wsuri, new WebSocketHandler() {
+
                 @Override
                 public void onOpen() {
                     Log.d(TAG, "Status: Connected to " + wsuri);
                     mConnection.sendTextMessage("Hello, world!");
-                }
-
-                @Override
-                public void onClose(int code, String reason) {
-                    Log.d(TAG, "Connection lost.");
                 }
 
                 @Override
@@ -34,17 +31,12 @@ public class Client {
                 }
 
                 @Override
-                public void onRawTextMessage(byte[] payload) {
-                    Log.d(TAG, "Got echo: " + payload.toString());
-                }
-
-                @Override
-                public void onBinaryMessage(byte[] payload) {
-                    Log.d(TAG, "Got echo: " + payload.toString());
+                public void onClose(int code, String reason) {
+                    Log.d(TAG, "Connection lost.");
                 }
             });
         } catch (WebSocketException e) {
-            e.printStackTrace();
+            Log.d(TAG, e.toString());
         }
     }
 }

@@ -1,4 +1,4 @@
-CANdroid
+vermeer-android
 ========
 
 This is the CANdroid project for CprE/EE/SE 491

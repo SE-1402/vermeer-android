@@ -22,7 +22,7 @@ public class Client {
                 @Override
                 public void onOpen() {
                     Log.d(TAG, "Status: Connected to " + wsuri);
-                    mConnection.sendTextMessage("Hello, world!");
+                    mConnection.sendTextMessage("Connect");
                 }
 
                 @Override

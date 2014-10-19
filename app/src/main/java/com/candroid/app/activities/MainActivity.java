@@ -7,11 +7,13 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
 
 import com.candroid.api.Client;
 import com.candroid.app.R;
 import com.candroid.app.dto.Macro;
 import com.candroid.app.dto.ObjectPool;
+import com.candroid.app.util.UIBuilder;
 import com.cengalabs.flatui.FlatUI;
 import com.crashlytics.android.Crashlytics;
 
@@ -22,6 +24,7 @@ import java.io.IOException;
 
 public class MainActivity extends Activity {
 
+    RelativeLayout layout;
     ListView listView;
 
     @Override
@@ -29,7 +32,7 @@ public class MainActivity extends Activity {
         super.onCreate(savedInstanceState);
         Crashlytics.start(this);
         setContentView(R.layout.activity_main);
-        listView = (ListView) findViewById(R.id.list);
+        layout = (RelativeLayout) findViewById(R.id.layout);
         FlatUI.setDefaultTheme(FlatUI.DARK);
         FlatUI.setActionBarTheme(this, FlatUI.DARK, false, false);
     }
@@ -42,8 +45,7 @@ public class MainActivity extends Activity {
             ObjectPool objectPool = serializer.read(ObjectPool.class, getAssets().open("display.xml"));
             //XMLPullParserHandler parserHandler = new XMLPullParserHandler();
             //macroList = parserHandler.parse(getAssets().open("display.xml"));
-            ArrayAdapter<Macro> adapter = new ArrayAdapter<Macro>(this, R.layout.list_item, objectPool.macros);
-            listView.setAdapter(adapter);
+            UIBuilder.setLayout(this, layout, objectPool);
         } catch (IOException e) {
             e.printStackTrace();
         } catch (Exception e) {
@@ -63,8 +65,9 @@ public class MainActivity extends Activity {
         // Handle presses on the action bar items
         switch (item.getItemId()) {
             case R.id.action_start:
-                Client.startSocketClient();
-                //mockInitialData();
+                // TODO: Use build variants to test with Prod vs Dev
+                //Client.startSocketClient();
+                mockInitialData();
                 return true;
             default:
                 return super.onOptionsItemSelected(item);

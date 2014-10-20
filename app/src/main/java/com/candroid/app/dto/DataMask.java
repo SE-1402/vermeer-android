@@ -10,18 +10,18 @@ import java.util.ArrayList;
 public class DataMask {
 
     @Attribute
-    private String name;
+    public String name;
 
     @Attribute
-    private int id;
+    public int id;
 
     @Attribute
-    private String background_colour;
+    public String background_colour;
 
     @Attribute
-    private String soft_key_mask;
+    public String soft_key_mask;
 
     @ElementList(name="include_object", required=false, inline=true)
-    private ArrayList<IncludeObject> includeObjects;
+    public ArrayList<IncludeObject> includeObjects;
 
 }

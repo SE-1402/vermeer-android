@@ -5,8 +5,10 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 
 import com.candroid.api.Client;
@@ -22,9 +24,12 @@ import org.simpleframework.xml.core.Persister;
 
 import java.io.IOException;
 
+import fr.castorflex.android.smoothprogressbar.SmoothProgressBar;
+
 public class MainActivity extends Activity {
 
     RelativeLayout layout;
+    ProgressBar progressBar;
     ListView listView;
 
     @Override
@@ -33,6 +38,7 @@ public class MainActivity extends Activity {
         Crashlytics.start(this);
         setContentView(R.layout.activity_main);
         layout = (RelativeLayout) findViewById(R.id.layout);
+        progressBar = (SmoothProgressBar) findViewById(R.id.progress_bar);
         FlatUI.setDefaultTheme(FlatUI.DARK);
         FlatUI.setActionBarTheme(this, FlatUI.DARK, false, false);
     }
@@ -67,7 +73,9 @@ public class MainActivity extends Activity {
             case R.id.action_start:
                 // TODO: Use build variants to test with Prod vs Dev
                 //Client.startSocketClient();
+                progressBar.setVisibility(View.VISIBLE);
                 mockInitialData();
+                progressBar.setVisibility(View.GONE);
                 return true;
             default:
                 return super.onOptionsItemSelected(item);

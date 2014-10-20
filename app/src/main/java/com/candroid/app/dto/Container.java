@@ -10,20 +10,20 @@ import java.util.ArrayList;
 public class Container {
 
     @Attribute
-    private String name;
+    public String name;
 
     @Attribute
-    private int id;
+    public int id;
 
     @Attribute
-    private int width;
+    public int width;
 
     @Attribute
-    private int height;
+    public int height;
 
     @Attribute
-    private int hidden;
+    public int hidden;
 
     @ElementList(name="include_object", required=false, inline=true)
-    private ArrayList<IncludeObject> includeObjects;
+    public ArrayList<IncludeObject> includeObjects;
 }

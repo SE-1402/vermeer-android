@@ -5,48 +5,49 @@ import org.simpleframework.xml.Root;
 
 @Root
 public class OutputNumber {
-    @Attribute
-    private String name;
 
     @Attribute
-    private int id;
+    public String name;
 
     @Attribute
-    private int width;
+    public int id;
 
     @Attribute
-    private int height;
+    public int width;
 
     @Attribute
-    private String font_attributes;
+    public int height;
 
     @Attribute
-    private String background_colour;
+    public String font_attributes;
 
     @Attribute
-    private String options;
+    public String background_colour;
 
     @Attribute
-    private int number_of_decimals;
+    public String options;
 
     @Attribute
-    private String format;
+    public int number_of_decimals;
 
     @Attribute
-    private String horizontal_justification;
+    public String format;
 
     @Attribute
-    private String vertical_justification;
+    public String horizontal_justification;
 
     @Attribute
-    private int offset;
+    public String vertical_justification;
 
     @Attribute
-    private int scale;
+    public int offset;
 
     @Attribute
-    private int value;
+    public int scale;
 
     @Attribute
-    private String variable_reference;
+    public int value;
+
+    @Attribute
+    public String variable_reference;
 }

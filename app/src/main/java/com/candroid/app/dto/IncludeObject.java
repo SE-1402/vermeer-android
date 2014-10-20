@@ -7,12 +7,12 @@ import org.simpleframework.xml.Root;
 public class IncludeObject {
 
     @Attribute
-    private String name;
+    public String name;
 
     @Attribute(required=false)
-    private int pos_x;
+    public int pos_x;
 
     @Attribute(required=false)
-    private int pos_y;
+    public int pos_y;
 
 }

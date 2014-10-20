@@ -7,56 +7,56 @@ import org.simpleframework.xml.Root;
 public class InputNumber {
 
     @Attribute
-    private String name;
+    public String name;
 
     @Attribute
-    private int id;
+    public int id;
 
     @Attribute
-    private int width;
+    public int width;
 
     @Attribute
-    private int height;
+    public int height;
 
     @Attribute
-    private String background_colour;
+    public String background_colour;
 
     @Attribute
-    private String font_attributes;
+    public String font_attributes;
 
     @Attribute
-    private String options;
+    public String options;
 
     @Attribute
-    private int min_value;
+    public int min_value;
 
     @Attribute
-    private int max_value;
+    public int max_value;
 
     @Attribute
-    private int offset;
+    public int offset;
 
     @Attribute
-    private int scale;
+    public int scale;
 
     @Attribute
-    private int number_of_decimals;
+    public int number_of_decimals;
 
     @Attribute
-    private String format;
+    public String format;
 
     @Attribute
-    private String horizontal_justification;
+    public String horizontal_justification;
 
     @Attribute
-    private String vertical_justification;
+    public String vertical_justification;
 
     @Attribute
-    private String inputobject_options;
+    public String inputobject_options;
 
     @Attribute
-    private int value;
+    public int value;
 
     @Attribute
-    private String variable_reference;
+    public String variable_reference;
 }

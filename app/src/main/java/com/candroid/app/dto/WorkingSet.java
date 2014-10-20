@@ -11,24 +11,24 @@ import java.util.ArrayList;
 public class WorkingSet {
 
     @Attribute
-    private String name;
+    public String name;
 
     @Attribute
-    private int id;
+    public int id;
 
     @Attribute
-    private String background_colour;
+    public String background_colour;
 
     @Attribute
-    private int selectable;
+    public int selectable;
 
     @Attribute
-    private String active_mask;
+    public String active_mask;
 
     @Element(name="outputstring")
-    private OutputString outputstring;
+    public OutputString outputstring;
 
     @ElementList(name="language", inline=true)
-    private ArrayList<Language> languages;
+    public ArrayList<Language> languages;
 
 }

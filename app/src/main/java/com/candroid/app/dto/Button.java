@@ -7,27 +7,27 @@ import org.simpleframework.xml.Root;
 public class Button {
 
     @Attribute
-    private String name;
+    public String name;
 
     @Attribute
-    private int id;
+    public int id;
 
     @Attribute
-    private int width;
+    public int width;
 
     @Attribute
-    private int height;
+    public int height;
 
     @Attribute
-    private String background_colour;
+    public String background_colour;
 
     @Attribute
-    private String border_colour;
+    public String border_colour;
 
     @Attribute
-    private int key_code;
+    public int key_code;
 
     @Attribute
-    private String options;
+    public String options;
 
 }

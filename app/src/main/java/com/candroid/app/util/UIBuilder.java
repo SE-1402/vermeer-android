@@ -1,5 +1,7 @@
 package com.candroid.app.util;
 
+import android.app.ActionBar;
+import android.app.Activity;
 import android.content.Context;
 import android.graphics.Color;
 import android.text.InputFilter;
@@ -11,6 +13,7 @@ import android.widget.EditText;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.candroid.app.R;
 import com.candroid.app.dto.Container;
 import com.candroid.app.dto.DataMask;
 import com.candroid.app.dto.IncludeObject;
@@ -36,9 +39,25 @@ public class UIBuilder {
 
         // Set the WorkingSet's id as our Key for getting/setting TAGS since we must use TAGS instead of ID's as our unique identifier.
         ArrayList<View> viewsList = new ArrayList<View>();
-        ArrayList<RelativeLayout> containerList = new ArrayList<RelativeLayout>();
         // Cast our view to specific Layout:
-        RelativeLayout layout = (RelativeLayout) view;
+        RelativeLayout rootView = (RelativeLayout) view;
+        RelativeLayout dataMaskLayout = (RelativeLayout) view.findViewById(R.id.layout_data_mask);
+        RelativeLayout softKeyMaskLeftLayout = (RelativeLayout) view.findViewById(R.id.layout_soft_key_mask_left);
+        RelativeLayout softKeyMaskRightLayout = (RelativeLayout) view.findViewById(R.id.layout_soft_key_mask_right);
+
+        // B.1 Working Set:
+        ActionBar actionBar = ((Activity) context).getActionBar();
+        if (actionBar != null) {
+            actionBar.setDisplayOptions(ActionBar.DISPLAY_SHOW_TITLE);
+            actionBar.setDisplayShowTitleEnabled(true);
+            actionBar.setTitle(objectPool.workingset.outputstring.value);
+        }
+        if (Convert.isNumeric(objectPool.workingset.background_colour)) {
+            rootView.setBackgroundColor(context.getResources().getColor(context.getResources().getIdentifier("vt" + objectPool.workingset.background_colour, "color", context.getPackageName())));
+        } else {
+            // Attempt to Parse Color:
+            rootView.setBackgroundColor(Color.parseColor(objectPool.workingset.background_colour));
+        }
         // B.7: Buttons:
         for (com.candroid.app.dto.Button vtButton : objectPool.buttons) {
             Button uiButton = new Button(context);
@@ -111,36 +130,40 @@ public class UIBuilder {
                     }
                 }
             }
-            containerList.add(uiLayout);
+            viewsList.add(uiLayout);
         }
         // B.2 DataMask Objects:
         for (DataMask vtDataMask : objectPool.dataMasks) {
-            RelativeLayout uiLayout = new RelativeLayout(context);
-            uiLayout.setId(vtDataMask.id);
-            uiLayout.setTag(vtDataMask.name);
-            uiLayout.setLayoutParams(new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
-            if (Convert.isNumeric(vtDataMask.background_colour)){
-                uiLayout.setBackgroundColor(context.getResources().getColor(context.getResources().getIdentifier("vt" + vtDataMask.background_colour, "color", context.getPackageName())));
-            } else {
-                // Attempt to Parse Color:
-                uiLayout.setBackgroundColor(Color.parseColor(vtDataMask.background_colour));
-            }
-            for (IncludeObject includeObject : vtDataMask.includeObjects) {
-                for (RelativeLayout container : containerList) {
-                    if (container.getTag().equals(includeObject.name)) {
-                        RelativeLayout.LayoutParams params = (RelativeLayout.LayoutParams) container.getLayoutParams();
-                        params.leftMargin = includeObject.pos_x;
-                        params.topMargin = includeObject.pos_y;
-                        container.setLayoutParams(params);
-                        // TODO: Not good programming!
-                        if (((RelativeLayout) container.getParent()) != null) {
-                            ((RelativeLayout) container.getParent()).removeView(container);
+            if (vtDataMask.name.equals(objectPool.workingset.active_mask)) {
+                RelativeLayout uiLayout = new RelativeLayout(context);
+                uiLayout.setId(vtDataMask.id);
+                uiLayout.setTag(vtDataMask.name);
+                RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
+                params.addRule(RelativeLayout.CENTER_IN_PARENT);
+                uiLayout.setLayoutParams(params);
+                if (Convert.isNumeric(vtDataMask.background_colour)) {
+                    uiLayout.setBackgroundColor(context.getResources().getColor(context.getResources().getIdentifier("vt" + vtDataMask.background_colour, "color", context.getPackageName())));
+                } else {
+                    // Attempt to Parse Color:
+                    uiLayout.setBackgroundColor(Color.parseColor(vtDataMask.background_colour));
+                }
+                for (IncludeObject includeObject : vtDataMask.includeObjects) {
+                    for (View container : viewsList) {
+                        if (container.getTag().equals(includeObject.name)) {
+                            RelativeLayout.LayoutParams paramsContainer = (RelativeLayout.LayoutParams) container.getLayoutParams();
+                            paramsContainer.leftMargin = includeObject.pos_x;
+                            paramsContainer.topMargin = includeObject.pos_y;
+                            container.setLayoutParams(paramsContainer);
+                            // TODO: Not good programming!
+                            if (((RelativeLayout) container.getParent()) != null) {
+                                ((RelativeLayout) container.getParent()).removeView(container);
+                            }
+                            uiLayout.addView(container);
                         }
-                        uiLayout.addView(container);
                     }
                 }
+                dataMaskLayout.addView(uiLayout);
             }
-            layout.addView(uiLayout);
         }
         return true;
     }

@@ -5,8 +5,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/DarkGray"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
     tools:context="com.candroid.app.activities.MainActivity">
 
     <fr.castorflex.android.smoothprogressbar.SmoothProgressBar
@@ -15,17 +13,38 @@
         android:layout_height="wrap_content"
         android:indeterminate="true"
         android:visibility="gone"
-        app:spb_sections_count="4"
         app:spb_color="#FF0000"
-        app:spb_speed="2.0"
-        app:spb_stroke_width="4dp"
-        app:spb_stroke_separator_length="4dp"
-        app:spb_reversed="false"
         app:spb_mirror_mode="false"
         app:spb_progressiveStart_activated="true"
         app:spb_progressiveStart_speed="1.5"
         app:spb_progressiveStop_speed="3.4"
-        />
+        app:spb_reversed="false"
+        app:spb_sections_count="4"
+        app:spb_speed="2.0"
+        app:spb_stroke_separator_length="4dp"
+        app:spb_stroke_width="4dp" />
 
+
+    <RelativeLayout
+        android:id="@+id/layout_data_mask"
+        android:layout_width="600dp"
+        android:layout_height="600dp"
+        android:layout_centerInParent="true"
+        android:background="@color/LightGrey" />
+
+
+    <RelativeLayout
+        android:id="@+id/layout_soft_key_mask_left"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_toLeftOf="@id/layout_data_mask"
+        android:layout_toStartOf="@id/layout_data_mask" />
+
+    <RelativeLayout
+        android:id="@+id/layout_soft_key_mask_right"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_toRightOf="@id/layout_data_mask"
+        android:layout_toEndOf="@id/layout_data_mask" />
 
 </RelativeLayout>

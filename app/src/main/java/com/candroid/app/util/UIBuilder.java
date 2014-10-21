@@ -30,6 +30,11 @@ import java.util.ArrayList;
 
 public class UIBuilder {
 
+    RelativeLayout rootView;
+    RelativeLayout dataMaskLayout;
+    RelativeLayout softKeyMaskLeftLayout;
+    RelativeLayout softKeyMaskRightLayout;
+
     /**
      * Compliant with the ISO format for Virtual Terminals
      *
@@ -38,18 +43,17 @@ public class UIBuilder {
      * @param objectPool The Root object pool sent across from the server and generated from the .iop file
      * @return True if the layout succeeded, False if it errors out in any way.
      */
-    public static boolean setLayout(Context context, View view, ObjectPool objectPool) {
+    public boolean setLayout(Context context, View view, ObjectPool objectPool) {
         // Must create all of the children and then the parents, adding the children to the parents
         // that they contain. Finally adding the parents to our root view.
 
         // Set the WorkingSet's id as our Key for getting/setting TAGS since we must use TAGS instead of ID's as our unique identifier.
         ArrayList<View> viewsList = new ArrayList<View>();
-        ArrayList<Macro> macroList = new ArrayList<Macro>();
         // Cast our view to specific Layout:
-        RelativeLayout rootView = (RelativeLayout) view;
-        RelativeLayout dataMaskLayout = (RelativeLayout) view.findViewById(R.id.layout_data_mask);
-        RelativeLayout softKeyMaskLeftLayout = (RelativeLayout) view.findViewById(R.id.layout_soft_key_mask_left);
-        RelativeLayout softKeyMaskRightLayout = (RelativeLayout) view.findViewById(R.id.layout_soft_key_mask_right);
+        rootView = (RelativeLayout) view;
+        dataMaskLayout = (RelativeLayout) view.findViewById(R.id.layout_data_mask);
+        softKeyMaskLeftLayout = (RelativeLayout) view.findViewById(R.id.layout_soft_key_mask_left);
+        softKeyMaskRightLayout = (RelativeLayout) view.findViewById(R.id.layout_soft_key_mask_right);
 
         // B.1 Working Set:
         ActionBar actionBar = ((Activity) context).getActionBar();
@@ -63,10 +67,6 @@ public class UIBuilder {
         } else {
             // Attempt to Parse Color:
             rootView.setBackgroundColor(Color.parseColor(objectPool.workingset.background_colour));
-        }
-        // B.6 Key Object:
-        for (Key vtKey : objectPool.keys) {
-            createVTKey(context, viewsList, macroList, vtKey);
         }
         // B.7 Button Object:
         for (com.candroid.app.dto.Button vtButton : objectPool.buttons) {
@@ -97,6 +97,14 @@ public class UIBuilder {
         for (DataMask vtDataMask : objectPool.dataMasks) {
             createVTDataMask(context, objectPool, viewsList, dataMaskLayout, vtDataMask);
         }
+        // B.16 Macro Objects:
+        for (Macro vtMacro : objectPool.macros) {
+            createVTMacro(context, objectPool, viewsList, vtMacro);
+        }
+        // B.6 Key Object:
+        for (Key vtKey : objectPool.keys) {
+            createVTKey(context, viewsList, vtKey);
+        }
         // B.3 SoftKeyMask Objects:
         for (SoftKeyMask vtSoftKeyMask : objectPool.softKeyMasks) {
             createVTSoftKeyMask(context, objectPool, viewsList, softKeyMaskLeftLayout, vtSoftKeyMask);
@@ -104,7 +112,35 @@ public class UIBuilder {
         return true;
     }
 
-    private static void createVTKey(Context context, ArrayList<View> viewsList, ArrayList<Macro> macroList, Key vtKey){
+    private void createVTMacro(Context context, final ObjectPool objectPool, final ArrayList<View> viewsList, final Macro vtMacro){
+        Button uiButton = new Button(context);
+        uiButton.setId(vtMacro.id);
+        uiButton.setTag(vtMacro.name);
+        uiButton.setLayoutParams(new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
+        uiButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (vtMacro.command_change_numeric_value != null ){
+                    for (View view : viewsList) {
+                        // Change value
+                    }
+                } else if (vtMacro.command_change_active_mask != null) {
+                    if (objectPool.workingset.name.equals(vtMacro.command_change_active_mask.working_set_object_id)) {
+                        dataMaskLayout.removeViewAt(0);
+                        for (View view : viewsList) {
+                            if (view.getTag().equals(vtMacro.command_change_active_mask.new_active_mask_object_id)){
+                                dataMaskLayout.addView(view);
+                            }
+                        }
+
+                    }
+                }
+            }
+        });
+        viewsList.add(uiButton);
+    }
+
+    private void createVTKey(Context context, ArrayList<View> viewsList, Key vtKey){
         RelativeLayout uiLayout = new RelativeLayout(context);
         uiLayout.setId(vtKey.id);
         uiLayout.setTag(vtKey.name);
@@ -126,9 +162,10 @@ public class UIBuilder {
         }
         for (IncludeMacro includeMacro : vtKey.include_macro) {
             if (includeMacro.event.equals("on_key_press")){
-                for (Macro macro : macroList) {
-                    if (macro.name.equals(includeMacro.name)){
+                for (View macro : viewsList) {
+                    if (macro.getTag().equals(includeMacro.name)){
                         // Update Event List (Hook up View/Controller for UI Changes)
+                        uiLayout.addView(macro);
                     }
                 }
             }
@@ -136,7 +173,7 @@ public class UIBuilder {
         viewsList.add(uiLayout);
     }
 
-    private static void createVTButton(Context context, ArrayList<View> viewsList, com.candroid.app.dto.Button vtButton) {
+    private void createVTButton(Context context, ArrayList<View> viewsList, com.candroid.app.dto.Button vtButton) {
         Button uiButton = new Button(context);
         uiButton.setId(vtButton.id);
         uiButton.setTag(vtButton.name);
@@ -146,7 +183,7 @@ public class UIBuilder {
         viewsList.add(uiButton);
     }
 
-    private static void createVTInputNumber(Context context, ArrayList<View> viewsList, InputNumber vtInputNumber) {
+    private void createVTInputNumber(Context context, ArrayList<View> viewsList, InputNumber vtInputNumber) {
         EditText uiEditText = new EditText(context);
         uiEditText.setId(vtInputNumber.id);
         uiEditText.setTag(vtInputNumber.name);
@@ -162,7 +199,7 @@ public class UIBuilder {
         viewsList.add(uiEditText);
     }
 
-    private static void createVTOutputString(Context context, ArrayList<View> viewsList, OutputString vtOutputString) {
+    private void createVTOutputString(Context context, ArrayList<View> viewsList, OutputString vtOutputString) {
         TextView uiTextView = new TextView(context);
         uiTextView.setId(vtOutputString.id);
         uiTextView.setTag(vtOutputString.name);
@@ -171,7 +208,7 @@ public class UIBuilder {
         viewsList.add(uiTextView);
     }
 
-    private static void createVTOutputNumber(Context context, ArrayList<View> viewsList, OutputNumber vtOutputNumber) {
+    private void createVTOutputNumber(Context context, ArrayList<View> viewsList, OutputNumber vtOutputNumber) {
         float displayValue = (vtOutputNumber.value + vtOutputNumber.offset) * vtOutputNumber.scale;
         TextView uiTextView = new TextView(context);
         uiTextView.setId(vtOutputNumber.id);
@@ -181,7 +218,7 @@ public class UIBuilder {
         viewsList.add(uiTextView);
     }
 
-    private static void createVTContainer(Context context, ArrayList<View> viewsList, Container vtContainer) {
+    private void createVTContainer(Context context, ArrayList<View> viewsList, Container vtContainer) {
         RelativeLayout uiLayout = new RelativeLayout(context);
         uiLayout.setId(vtContainer.id);
         uiLayout.setTag(vtContainer.name);
@@ -209,7 +246,7 @@ public class UIBuilder {
         viewsList.add(uiLayout);
     }
 
-    private static void createVTDataMask(Context context, ObjectPool objectPool, ArrayList<View> viewsList, RelativeLayout dataMaskLayout, DataMask vtDataMask) {
+    private void createVTDataMask(Context context, ObjectPool objectPool, ArrayList<View> viewsList, RelativeLayout dataMaskLayout, DataMask vtDataMask) {
         if (vtDataMask.name.equals(objectPool.workingset.active_mask)) {
             RelativeLayout uiLayout = new RelativeLayout(context);
             uiLayout.setId(vtDataMask.id);
@@ -242,7 +279,7 @@ public class UIBuilder {
         }
     }
 
-    private static void createVTSoftKeyMask(Context context, ObjectPool objectPool, ArrayList<View> viewsList, RelativeLayout softKeyMaskLayout, SoftKeyMask vtSoftKeyMask) {
+    private void createVTSoftKeyMask(Context context, ObjectPool objectPool, ArrayList<View> viewsList, RelativeLayout softKeyMaskLayout, SoftKeyMask vtSoftKeyMask) {
         RelativeLayout uiLayout = new RelativeLayout(context);
         uiLayout.setId(vtSoftKeyMask.id);
         uiLayout.setTag(vtSoftKeyMask.name);

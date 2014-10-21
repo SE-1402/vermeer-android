@@ -7,9 +7,9 @@ import org.simpleframework.xml.Root;
 public class CommandChangeActiveMask {
 
     @Attribute
-    private String working_set_object_id;
+    public String working_set_object_id;
 
     @Attribute
-    private String new_active_mask_object_id;
+    public String new_active_mask_object_id;
 
 }

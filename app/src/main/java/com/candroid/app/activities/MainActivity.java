@@ -51,7 +51,8 @@ public class MainActivity extends Activity {
             ObjectPool objectPool = serializer.read(ObjectPool.class, getAssets().open("display.xml"));
             //XMLPullParserHandler parserHandler = new XMLPullParserHandler();
             //macroList = parserHandler.parse(getAssets().open("display.xml"));
-            UIBuilder.setLayout(this, layout, objectPool);
+            UIBuilder builder = new UIBuilder();
+            builder.setLayout(this, layout, objectPool);
         } catch (IOException e) {
             e.printStackTrace();
         } catch (Exception e) {

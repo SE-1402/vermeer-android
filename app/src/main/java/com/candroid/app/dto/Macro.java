@@ -8,17 +8,17 @@ import org.simpleframework.xml.Root;
 public class Macro {
 
     @Attribute
-    private String name;
+    public String name;
 
     @Attribute
-    private int id;
+    public int id;
 
     @Attribute
-    private int number_of_bytes;
+    public int number_of_bytes;
 
     @Element(name="command_change_numeric_value", required = false)
-    private CommandChangeNumericValue commandChangeNumericValue;
+    public CommandChangeNumericValue command_change_numeric_value;
 
     @Element(name="command_change_active_mask", required = false)
-    private CommandChangeActiveMask commandChangeActiveMask;
+    public CommandChangeActiveMask command_change_active_mask;
 }

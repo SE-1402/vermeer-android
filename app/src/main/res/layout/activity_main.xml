@@ -47,4 +47,15 @@
         android:layout_toRightOf="@id/layout_data_mask"
         android:layout_toEndOf="@id/layout_data_mask" />
 
+    <View
+        android:layout_width="2dp"
+        android:layout_height="match_parent"
+        android:layout_toRightOf="@id/layout_soft_key_mask_left"
+        android:background="@color/DarkSlateGray"/>
+
+    <View
+        android:layout_width="2dp"
+        android:layout_height="match_parent"
+        android:layout_toLeftOf="@id/layout_soft_key_mask_right"
+        android:background="@color/DarkSlateGray"/>
 </RelativeLayout>

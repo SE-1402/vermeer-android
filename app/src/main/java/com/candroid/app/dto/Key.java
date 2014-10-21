@@ -10,20 +10,20 @@ import java.util.ArrayList;
 public class Key {
 
     @Attribute
-    private String name;
+    public String name;
 
     @Attribute
-    private int id;
+    public int id;
 
     @Attribute
-    private String background_colour;
+    public String background_colour;
 
     @Attribute
-    private int key_code;
+    public int key_code;
 
     @ElementList(name="include_macro", required=false, inline=true)
-    private ArrayList<IncludeMacro> includeMacros;
+    public ArrayList<IncludeMacro> include_macro;
 
     @ElementList(name="include_object", required=false, inline=true)
-    private ArrayList<IncludeObject> includeObjects;
+    public ArrayList<IncludeObject> include_object;
 }

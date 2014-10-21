@@ -10,14 +10,14 @@ import java.util.ArrayList;
 public class SoftKeyMask {
 
     @Attribute
-    private String name;
+    public String name;
 
     @Attribute
-    private int id;
+    public int id;
 
     @Attribute
-    private int background_colour;
+    public int background_colour;
 
     @ElementList(name="include_object", inline=true)
-    private ArrayList<IncludeObject> includeObjects;
+    public ArrayList<IncludeObject> includeObjects;
 }

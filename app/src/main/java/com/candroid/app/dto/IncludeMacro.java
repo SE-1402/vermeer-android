@@ -7,9 +7,9 @@ import org.simpleframework.xml.Root;
 public class IncludeMacro {
 
     @Attribute
-    private String name;
+    public String name;
 
     @Attribute
-    private String event;
+    public String event;
 
 }

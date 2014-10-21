@@ -7,9 +7,9 @@ import org.simpleframework.xml.Root;
 public class CommandChangeNumericValue {
 
     @Attribute
-    private String object_id;
+    public String object_id;
 
     @Attribute
-    private String new_value;
+    public String new_value;
 
 }

@@ -20,7 +20,7 @@ repositories {
 
 android {
     compileSdkVersion 19
-    buildToolsVersion "20.0.0"
+    buildToolsVersion "21.0.0"
 
     defaultConfig {
         minSdkVersion 14
@@ -46,11 +46,10 @@ android {
 
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
-    compile 'com.android.support:support-v4:20.0.0'
-    compile 'com.github.castorflex.smoothprogressbar:library:1.0.0'
+    compile 'com.android.support:support-v4:21.0.0'
     compile 'com.github.eluleci:flatui:0.1.3'
     compile 'com.crashlytics.android:crashlytics:1.+'
-    //compile 'com.koushikdutta.async:androidasync:1.3.8'
+    // Only used for Mock Data using XML: Removable upon JSON implementation:
     compile('org.simpleframework:simple-xml:2.7.1') {
         exclude module: 'stax'
         exclude module: 'stax-api'

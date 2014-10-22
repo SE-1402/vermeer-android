@@ -1,21 +1,20 @@
 package com.candroid.app.activities;
 
-import android.app.Activity;
+import android.net.Uri;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentActivity;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
-import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 
-import com.candroid.api.Client;
 import com.candroid.app.R;
-import com.candroid.app.dto.Macro;
 import com.candroid.app.dto.ObjectPool;
 import com.candroid.app.util.UIBuilder;
+import com.candroid.app.views.DataMaskFragment;
 import com.cengalabs.flatui.FlatUI;
 import com.crashlytics.android.Crashlytics;
 
@@ -24,12 +23,11 @@ import org.simpleframework.xml.core.Persister;
 
 import java.io.IOException;
 
-import fr.castorflex.android.smoothprogressbar.SmoothProgressBar;
+public class MainActivity extends FragmentActivity implements DataMaskFragment.OnFragmentInteractionListener{
 
-public class MainActivity extends Activity {
+    public static final String TAG = MainActivity.class.getSimpleName();
 
     RelativeLayout layout;
-    ProgressBar progressBar;
     ListView listView;
 
     @Override
@@ -38,7 +36,6 @@ public class MainActivity extends Activity {
         Crashlytics.start(this);
         setContentView(R.layout.activity_main);
         layout = (RelativeLayout) findViewById(R.id.layout);
-        progressBar = (SmoothProgressBar) findViewById(R.id.progress_bar);
         FlatUI.setDefaultTheme(FlatUI.DARK);
         FlatUI.setActionBarTheme(this, FlatUI.DARK, false, false);
     }
@@ -47,16 +44,22 @@ public class MainActivity extends Activity {
         // Local file example
         try {
             Serializer serializer = new Persister();
-
             ObjectPool objectPool = serializer.read(ObjectPool.class, getAssets().open("display.xml"));
-            //XMLPullParserHandler parserHandler = new XMLPullParserHandler();
-            //macroList = parserHandler.parse(getAssets().open("display.xml"));
-            UIBuilder builder = new UIBuilder();
-            builder.setLayout(this, layout, objectPool);
+            UIBuilder builder = new UIBuilder(this, this, layout);
+            builder.createLayout(objectPool);
+            builder.setDataMask(objectPool.workingset.active_mask);
         } catch (IOException e) {
             e.printStackTrace();
         } catch (Exception e) {
             e.printStackTrace();
+        }
+    }
+
+    public void showFragment(Fragment fragment){
+        if (fragment != null) {
+            getSupportFragmentManager().beginTransaction()
+                    .add(R.id.layout_data_mask, fragment)
+                    .commit();
         }
     }
 
@@ -74,12 +77,15 @@ public class MainActivity extends Activity {
             case R.id.action_start:
                 // TODO: Use build variants to test with Prod vs Dev
                 //Client.startSocketClient();
-                progressBar.setVisibility(View.VISIBLE);
                 mockInitialData();
-                progressBar.setVisibility(View.GONE);
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
+    }
+
+    @Override
+    public void onFragmentInteraction(Uri uri) {
+        Log.i(TAG, uri.toString());
     }
 }

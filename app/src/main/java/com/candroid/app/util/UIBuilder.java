@@ -4,6 +4,7 @@ import android.app.ActionBar;
 import android.app.Activity;
 import android.content.Context;
 import android.graphics.Color;
+import android.support.v4.app.Fragment;
 import android.text.InputFilter;
 import android.text.InputType;
 import android.view.View;
@@ -14,6 +15,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.candroid.app.R;
+import com.candroid.app.activities.MainActivity;
 import com.candroid.app.dto.Container;
 import com.candroid.app.dto.DataMask;
 import com.candroid.app.dto.IncludeMacro;
@@ -25,30 +27,39 @@ import com.candroid.app.dto.ObjectPool;
 import com.candroid.app.dto.OutputNumber;
 import com.candroid.app.dto.OutputString;
 import com.candroid.app.dto.SoftKeyMask;
+import com.candroid.app.views.DataMaskFragment;
 
 import java.util.ArrayList;
 
 public class UIBuilder {
+
+    Activity activity;
+    Context context;
+    View view;
 
     RelativeLayout rootView;
     RelativeLayout dataMaskLayout;
     RelativeLayout softKeyMaskLeftLayout;
     RelativeLayout softKeyMaskRightLayout;
 
+    ArrayList<View> viewsList;
+    ArrayList<Fragment> dataMaskFragmentList;
+
+    public UIBuilder(Activity activity, Context context, View view) {
+        this.activity = activity;
+        this.context = context;
+        this.view = view;
+        viewsList = new ArrayList<View>();
+        dataMaskFragmentList = new ArrayList<Fragment>();
+    }
+
     /**
      * Compliant with the ISO format for Virtual Terminals
      *
-     * @param context
-     * @param view       The Root Layout's View to add items too.
      * @param objectPool The Root object pool sent across from the server and generated from the .iop file
      * @return True if the layout succeeded, False if it errors out in any way.
      */
-    public boolean setLayout(Context context, View view, ObjectPool objectPool) {
-        // Must create all of the children and then the parents, adding the children to the parents
-        // that they contain. Finally adding the parents to our root view.
-
-        // Set the WorkingSet's id as our Key for getting/setting TAGS since we must use TAGS instead of ID's as our unique identifier.
-        ArrayList<View> viewsList = new ArrayList<View>();
+    public boolean createLayout(ObjectPool objectPool) {
         // Cast our view to specific Layout:
         rootView = (RelativeLayout) view;
         dataMaskLayout = (RelativeLayout) view.findViewById(R.id.layout_data_mask);
@@ -86,13 +97,13 @@ public class UIBuilder {
         }
 
         // B.4 Container Objects:
-        // TODO: Think about using fragments for Containers
-        // Then we can swap out the R.id.layout_data_mask object for the current one.
         for (Container vtContainer : objectPool.containers) {
             createVTContainer(context, viewsList, vtContainer);
         }
 
         /* Add DataMask and SoftKeyMask Objects last */
+        // TODO: Use fragments for Masks (Data & SoftKeys)
+        // Then we can swap out the R.id.layout_data_mask object for the current one.
         // B.2 DataMask Objects:
         for (DataMask vtDataMask : objectPool.dataMasks) {
             createVTDataMask(context, objectPool, viewsList, dataMaskLayout, vtDataMask);
@@ -112,7 +123,15 @@ public class UIBuilder {
         return true;
     }
 
-    private void createVTMacro(Context context, final ObjectPool objectPool, final ArrayList<View> viewsList, final Macro vtMacro){
+    public void setDataMask(String activeMaskName) {
+        for (Fragment fragment : dataMaskFragmentList) {
+            if (((DataMaskFragment) fragment).getName().equals(activeMaskName)){
+                ((MainActivity) activity).showFragment(fragment);
+            }
+        }
+    }
+
+    private void createVTMacro(Context context, final ObjectPool objectPool, final ArrayList<View> viewsList, final Macro vtMacro) {
         Button uiButton = new Button(context);
         uiButton.setId(vtMacro.id);
         uiButton.setTag(vtMacro.name);
@@ -120,7 +139,7 @@ public class UIBuilder {
         uiButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (vtMacro.command_change_numeric_value != null ){
+                if (vtMacro.command_change_numeric_value != null) {
                     for (View view : viewsList) {
                         // Change value
                     }
@@ -128,7 +147,7 @@ public class UIBuilder {
                     if (objectPool.workingset.name.equals(vtMacro.command_change_active_mask.working_set_object_id)) {
                         dataMaskLayout.removeViewAt(0);
                         for (View view : viewsList) {
-                            if (view.getTag().equals(vtMacro.command_change_active_mask.new_active_mask_object_id)){
+                            if (view.getTag().equals(vtMacro.command_change_active_mask.new_active_mask_object_id)) {
                                 dataMaskLayout.addView(view);
                             }
                         }
@@ -140,7 +159,7 @@ public class UIBuilder {
         viewsList.add(uiButton);
     }
 
-    private void createVTKey(Context context, ArrayList<View> viewsList, Key vtKey){
+    private void createVTKey(Context context, ArrayList<View> viewsList, Key vtKey) {
         RelativeLayout uiLayout = new RelativeLayout(context);
         uiLayout.setId(vtKey.id);
         uiLayout.setTag(vtKey.name);
@@ -161,9 +180,9 @@ public class UIBuilder {
             }
         }
         for (IncludeMacro includeMacro : vtKey.include_macro) {
-            if (includeMacro.event.equals("on_key_press")){
+            if (includeMacro.event.equals("on_key_press")) {
                 for (View macro : viewsList) {
-                    if (macro.getTag().equals(includeMacro.name)){
+                    if (macro.getTag().equals(includeMacro.name)) {
                         // Update Event List (Hook up View/Controller for UI Changes)
                         uiLayout.addView(macro);
                     }
@@ -247,36 +266,23 @@ public class UIBuilder {
     }
 
     private void createVTDataMask(Context context, ObjectPool objectPool, ArrayList<View> viewsList, RelativeLayout dataMaskLayout, DataMask vtDataMask) {
-        if (vtDataMask.name.equals(objectPool.workingset.active_mask)) {
-            RelativeLayout uiLayout = new RelativeLayout(context);
-            uiLayout.setId(vtDataMask.id);
-            uiLayout.setTag(vtDataMask.name);
-            RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
-            params.addRule(RelativeLayout.CENTER_IN_PARENT);
-            uiLayout.setLayoutParams(params);
-            if (Convert.isNumeric(vtDataMask.background_colour)) {
-                uiLayout.setBackgroundColor(context.getResources().getColor(context.getResources().getIdentifier("vt" + vtDataMask.background_colour, "color", context.getPackageName())));
-            } else {
-                // Attempt to Parse Color:
-                uiLayout.setBackgroundColor(Color.parseColor(vtDataMask.background_colour));
-            }
-            for (IncludeObject includeObject : vtDataMask.includeObjects) {
-                for (View container : viewsList) {
-                    if (container.getTag().equals(includeObject.name)) {
-                        RelativeLayout.LayoutParams paramsContainer = (RelativeLayout.LayoutParams) container.getLayoutParams();
-                        paramsContainer.leftMargin = includeObject.pos_x;
-                        paramsContainer.topMargin = includeObject.pos_y;
-                        container.setLayoutParams(paramsContainer);
-                        // TODO: Not good programming!
-                        if (((RelativeLayout) container.getParent()) != null) {
-                            ((RelativeLayout) container.getParent()).removeView(container);
-                        }
-                        uiLayout.addView(container);
-                    }
+        DataMaskFragment dataMaskFragment = DataMaskFragment.newInstance()
+                .setName(vtDataMask.name)
+                .setId(vtDataMask.id)
+                .setBackgroundColor(vtDataMask.background_colour);
+
+        for (IncludeObject includeObject : vtDataMask.includeObjects) {
+            for (View container : viewsList) {
+                if (container.getTag().equals(includeObject.name)) {
+                    RelativeLayout.LayoutParams paramsContainer = (RelativeLayout.LayoutParams) container.getLayoutParams();
+                    paramsContainer.leftMargin = includeObject.pos_x;
+                    paramsContainer.topMargin = includeObject.pos_y;
+                    container.setLayoutParams(paramsContainer);
+                    dataMaskFragment.addIncludeObject(container);
                 }
             }
-            dataMaskLayout.addView(uiLayout);
         }
+        dataMaskFragmentList.add(dataMaskFragment);
     }
 
     private void createVTSoftKeyMask(Context context, ObjectPool objectPool, ArrayList<View> viewsList, RelativeLayout softKeyMaskLayout, SoftKeyMask vtSoftKeyMask) {

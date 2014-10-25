@@ -1,7 +1,15 @@
 package com.candroid.api;
 
 
+import android.app.Activity;
 import android.util.Log;
+
+import com.candroid.app.BuildConfig;
+import com.candroid.app.activities.MainActivity;
+import com.candroid.app.dto.ObjectPool;
+import com.google.gson.FieldNamingPolicy;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 
 import de.tavendo.autobahn.WebSocketConnection;
 import de.tavendo.autobahn.WebSocketException;
@@ -13,20 +21,36 @@ public class Client {
 
     private static final WebSocketConnection mConnection = new WebSocketConnection();
 
-    public static void startSocketClient(){
-        final String wsuri = "ws://10.0.0.14:9000";
+    private Activity activity;
+    private Gson gson;
 
+    public Client (Activity activity){
+        gson = new GsonBuilder().setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES).create();
+        this.activity = activity;
+    }
+
+    public void startSocketClient(){
+        final String wsuri = BuildConfig.WS_URI;
         try {
             mConnection.connect(wsuri, new WebSocketHandler() {
 
                 @Override
                 public void onOpen() {
                     Log.d(TAG, "Status: Connected to " + wsuri);
-                    mConnection.sendTextMessage("Connect");
+                    if (!BuildConfig.DEBUG) {
+                        mConnection.sendTextMessage("connect");
+                    } else {
+                        mConnection.sendTextMessage("test");
+                    }
                 }
 
                 @Override
                 public void onTextMessage(String payload) {
+                    // TODO: Payload to POJO objects!
+                    if (payload.contains("workingset")) {
+                        ObjectPool objectPool = gson.fromJson(payload, ObjectPool.class);
+                        ((MainActivity) activity).initDisplay(objectPool);
+                    }
                     Log.d(TAG, "Got echo: " + payload);
                 }
 

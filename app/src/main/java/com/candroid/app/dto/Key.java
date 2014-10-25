@@ -22,8 +22,8 @@ public class Key {
     public int key_code;
 
     @ElementList(name="include_macro", required=false, inline=true)
-    public ArrayList<IncludeMacro> include_macro;
+    public IncludeMacro include_macro;
 
     @ElementList(name="include_object", required=false, inline=true)
-    public ArrayList<IncludeObject> include_object;
+    public IncludeObject include_object;
 }

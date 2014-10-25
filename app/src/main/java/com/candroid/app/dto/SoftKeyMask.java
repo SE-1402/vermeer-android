@@ -1,5 +1,7 @@
 package com.candroid.app.dto;
 
+import com.google.gson.annotations.SerializedName;
+
 import org.simpleframework.xml.Attribute;
 import org.simpleframework.xml.ElementList;
 import org.simpleframework.xml.Root;
@@ -19,5 +21,6 @@ public class SoftKeyMask {
     public int background_colour;
 
     @ElementList(name="include_object", inline=true)
-    public ArrayList<IncludeObject> includeObjects;
+    @SerializedName("include_object")
+    public ArrayList<IncludeObject> includeObject;
 }

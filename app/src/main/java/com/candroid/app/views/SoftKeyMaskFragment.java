@@ -5,29 +5,28 @@ import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 
 import com.candroid.app.R;
-import com.candroid.app.activities.MainActivity;
 import com.candroid.app.util.Convert;
 
 import java.util.ArrayList;
 
 /**
- * A simple {@link Fragment} subclass.
+ * A simple {@link android.support.v4.app.Fragment} subclass.
  * Activities that contain this fragment must implement the
- * {@link DataMaskFragment.OnFragmentInteractionListener} interface
+ * {@link com.candroid.app.views.SoftKeyMaskFragment.OnFragmentInteractionListener} interface
  * to handle interaction events.
- * Use the {@link DataMaskFragment#newInstance} factory method to
+ * Use the {@link com.candroid.app.views.SoftKeyMaskFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class DataMaskFragment extends Fragment {
-    private static final String DATA_ID = "data_mask_id";
-    private static final String DATA_NAME = "data_mask_name";
+public class SoftKeyMaskFragment extends Fragment {
+    private static final String DATA_ID = "soft_key_mask_id";
+    private static final String DATA_NAME = "soft_key_mask_name";
 
     private int id;
     private String name;
@@ -39,22 +38,22 @@ public class DataMaskFragment extends Fragment {
     private OnFragmentInteractionListener mListener;
 
     private View view;
-    private RelativeLayout layout;
+    private LinearLayout layout;
 
-    private String color;
+    private int color;
     private ArrayList<View> viewList = new ArrayList<View>();
 
     /**
      * @return A new instance of fragment DataMaskFragment.
      */
-    public static DataMaskFragment newInstance() {
-        DataMaskFragment fragment = new DataMaskFragment();
+    public static SoftKeyMaskFragment newInstance() {
+        SoftKeyMaskFragment fragment = new SoftKeyMaskFragment();
         Bundle args = new Bundle();
         fragment.setArguments(args);
         return fragment;
     }
 
-    public DataMaskFragment() {
+    public SoftKeyMaskFragment() {
         // Required empty public constructor
     }
 
@@ -65,36 +64,31 @@ public class DataMaskFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        view = inflater.inflate(R.layout.fragment_data_mask, container, false);
-        layout = (RelativeLayout) view.findViewById(R.id.layout_data_mask);
+        view = inflater.inflate(R.layout.fragment_soft_key_mask, container, false);
+        layout = (LinearLayout) view.findViewById(R.id.layout_soft_key_mask);
         setBackgroundColor();
         addIncludedObjects();
         return view;
     }
 
     /* Helper Methods */
-    public DataMaskFragment setName(String name) {
+    public SoftKeyMaskFragment setName(String name) {
         this.name = name;
         return this;
     }
 
-    public DataMaskFragment setId(int id) {
+    public SoftKeyMaskFragment setId(int id) {
         this.id = id;
         return this;
     }
 
-    public DataMaskFragment setBackgroundColor(String color) {
+    public SoftKeyMaskFragment setBackgroundColor(int color) {
         this.color = color;
         return this;
     }
 
     private void setBackgroundColor() {
-        if (Convert.isNumeric(color)) {
-            layout.setBackgroundColor(getActivity().getResources().getColor(getActivity().getResources().getIdentifier("vt" + color, "color", getActivity().getPackageName())));
-        } else {
-            // Attempt to Parse Color:
-            layout.setBackgroundColor(Color.parseColor(color));
-        }
+        layout.setBackgroundColor(getActivity().getResources().getColor(getActivity().getResources().getIdentifier("vt" + color, "color", getActivity().getPackageName())));
     }
 
     public void addIncludeObject(View child) {
@@ -103,9 +97,6 @@ public class DataMaskFragment extends Fragment {
 
     private void addIncludedObjects() {
         for (View view : viewList) {
-            if (view.getParent() != null) {
-                ((ViewGroup) view.getParent()).removeView(view);
-            }
             layout.addView(view);
         }
     }
@@ -138,8 +129,7 @@ public class DataMaskFragment extends Fragment {
      * >Communicating with Other Fragments</a> for more information.
      */
     public interface OnFragmentInteractionListener {
-        // TODO: Update argument type and name
-        public void onFragmentInteraction(Uri uri);
+        public void onSoftKeyClicked(int id);
     }
 
 }

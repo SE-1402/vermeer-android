@@ -1,5 +1,4 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/layout"
     android:layout_width="match_parent"
@@ -7,7 +6,7 @@
     android:background="@color/DarkGray"
     tools:context="com.candroid.app.activities.MainActivity">
 
-    <RelativeLayout
+    <FrameLayout
         android:id="@+id/layout_data_mask"
         android:layout_width="600dp"
         android:layout_height="600dp"
@@ -15,29 +14,31 @@
         android:background="@color/LightGrey" />
 
 
-    <RelativeLayout
+    <FrameLayout
         android:id="@+id/layout_soft_key_mask_left"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_toLeftOf="@id/layout_data_mask"
-        android:layout_toStartOf="@id/layout_data_mask" />
+        android:layout_toStartOf="@id/layout_data_mask"
+        android:orientation="vertical" />
 
-    <RelativeLayout
+    <FrameLayout
         android:id="@+id/layout_soft_key_mask_right"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_toEndOf="@id/layout_data_mask"
         android:layout_toRightOf="@id/layout_data_mask"
-        android:layout_toEndOf="@id/layout_data_mask" />
+        android:orientation="vertical" />
 
     <View
         android:layout_width="2dp"
         android:layout_height="match_parent"
         android:layout_toRightOf="@id/layout_soft_key_mask_left"
-        android:background="@color/DarkSlateGray"/>
+        android:background="@color/DarkSlateGray" />
 
     <View
         android:layout_width="2dp"
         android:layout_height="match_parent"
         android:layout_toLeftOf="@id/layout_soft_key_mask_right"
-        android:background="@color/DarkSlateGray"/>
+        android:background="@color/DarkSlateGray" />
 </RelativeLayout>

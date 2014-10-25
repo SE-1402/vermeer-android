@@ -4,6 +4,8 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -11,10 +13,13 @@ import android.view.MenuItem;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 
+import com.candroid.api.Client;
+import com.candroid.app.BuildConfig;
 import com.candroid.app.R;
 import com.candroid.app.dto.ObjectPool;
 import com.candroid.app.util.UIBuilder;
 import com.candroid.app.views.DataMaskFragment;
+import com.candroid.app.views.SoftKeyMaskFragment;
 import com.cengalabs.flatui.FlatUI;
 import com.crashlytics.android.Crashlytics;
 
@@ -22,8 +27,9 @@ import org.simpleframework.xml.Serializer;
 import org.simpleframework.xml.core.Persister;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
-public class MainActivity extends FragmentActivity implements DataMaskFragment.OnFragmentInteractionListener{
+public class MainActivity extends FragmentActivity implements DataMaskFragment.OnFragmentInteractionListener, SoftKeyMaskFragment.OnFragmentInteractionListener {
 
     public static final String TAG = MainActivity.class.getSimpleName();
 
@@ -40,25 +46,34 @@ public class MainActivity extends FragmentActivity implements DataMaskFragment.O
         FlatUI.setActionBarTheme(this, FlatUI.DARK, false, false);
     }
 
-    private void mockInitialData() {
-        // Local file example
-        try {
-            Serializer serializer = new Persister();
-            ObjectPool objectPool = serializer.read(ObjectPool.class, getAssets().open("display.xml"));
-            UIBuilder builder = new UIBuilder(this, this, layout);
-            builder.createLayout(objectPool);
-            builder.setDataMask(objectPool.workingset.active_mask);
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (Exception e) {
-            e.printStackTrace();
+    public void showFragment(ArrayList<Fragment> fragments, int fragmentIndex, boolean addToBackStack) {
+        FragmentManager fm = getSupportFragmentManager();
+        FragmentTransaction transaction = fm.beginTransaction();
+        for (int i = 0; i < fragments.size(); i++) {
+            if (i == fragmentIndex) {
+                transaction.show(fragments.get(i));
+            } else {
+                transaction.hide(fragments.get(i));
+            }
+        }
+        if (addToBackStack) {
+            transaction.addToBackStack(null);
+        }
+        transaction.commit();
+    }
+
+    public void showSoftKeyMaskLeftFragment(Fragment fragment) {
+        if (fragment != null) {
+            getSupportFragmentManager().beginTransaction()
+                    .add(R.id.layout_soft_key_mask_left, fragment)
+                    .commit();
         }
     }
 
-    public void showFragment(Fragment fragment){
+    public void showSoftKeyMaskRightFragment(Fragment fragment) {
         if (fragment != null) {
             getSupportFragmentManager().beginTransaction()
-                    .add(R.id.layout_data_mask, fragment)
+                    .add(R.id.layout_soft_key_mask_right, fragment)
                     .commit();
         }
     }
@@ -75,9 +90,12 @@ public class MainActivity extends FragmentActivity implements DataMaskFragment.O
         // Handle presses on the action bar items
         switch (item.getItemId()) {
             case R.id.action_start:
-                // TODO: Use build variants to test with Prod vs Dev
-                //Client.startSocketClient();
-                mockInitialData();
+                if (!BuildConfig.MOCK) {
+                    Client client = new Client(this);
+                    client.startSocketClient();
+                } else {
+                    mockInitialData();
+                }
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
@@ -87,5 +105,42 @@ public class MainActivity extends FragmentActivity implements DataMaskFragment.O
     @Override
     public void onFragmentInteraction(Uri uri) {
         Log.i(TAG, uri.toString());
+    }
+
+    @Override
+    public void onSoftKeyClicked(int id) {
+        Log.i(TAG, "ID: " + String.valueOf(id));
+    }
+
+    private void mockInitialData() {
+        try {
+            Serializer serializer = new Persister();
+            ObjectPool objectPool = serializer.read(ObjectPool.class, getAssets().open("display.xml"));
+            UIBuilder builder = new UIBuilder(this, this, layout)
+                    .createLayout(objectPool)
+                    .initialize();
+            // Set Current Masks
+            builder.setDataMask(objectPool.workingset.active_mask);
+            // TODO: Bad idea to hardcode this value:
+            builder.setSoftKeyMaskLeft(objectPool.softKeyMask.get(0).name);
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void initDisplay(ObjectPool objectPool) {
+        try {
+            UIBuilder builder = new UIBuilder(this, this, layout)
+                    .createLayout(objectPool)
+                    .initialize();
+            // Set Current Masks
+            builder.setDataMask(objectPool.workingset.active_mask);
+            // TODO: Bad idea to hardcode this value:
+            builder.setSoftKeyMaskLeft(objectPool.softKeyMask.get(0).name);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }

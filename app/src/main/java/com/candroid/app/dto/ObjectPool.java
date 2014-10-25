@@ -1,5 +1,7 @@
 package com.candroid.app.dto;
 
+import com.google.gson.annotations.SerializedName;
+
 import org.simpleframework.xml.Element;
 import org.simpleframework.xml.ElementList;
 import org.simpleframework.xml.Root;
@@ -10,64 +12,84 @@ import java.util.ArrayList;
 public class ObjectPool {
 
     @Element
+    @SerializedName("workingset")
     public WorkingSet workingset;
 
     @ElementList(entry="macro", inline=true)
-    public ArrayList<Macro> macros;
+    @SerializedName("macro")
+    public ArrayList<Macro> macro;
 
     @ElementList(entry="datamask", inline=true)
-    public ArrayList<DataMask> dataMasks;
+    @SerializedName("datamask")
+    public ArrayList<DataMask> dataMask;
 
     @ElementList(entry="container", inline=true)
-    public ArrayList<Container> containers;
+    @SerializedName("container")
+    public ArrayList<Container> container;
 
     @ElementList(entry="key", inline=true)
-    public ArrayList<Key> keys;
+    @SerializedName("key")
+    public ArrayList<Key> key;
 
     @ElementList(entry="button", inline=true)
-    public ArrayList<Button> buttons;
+    @SerializedName("button")
+    public ArrayList<Button> button;
 
     @ElementList(entry="inputnumber", inline=true)
-    public ArrayList<InputNumber> inputNumbers;
+    @SerializedName("inputnumber")
+    public ArrayList<InputNumber> inputNumber;
 
     @ElementList(entry="outputnumber", inline=true)
-    public ArrayList<OutputNumber> outputNumbers;
+    @SerializedName("outputnumber")
+    public ArrayList<OutputNumber> outputNumber;
 
     @ElementList(entry="rectangle", inline=true)
-    public ArrayList<Rectangle> rectangles;
+    @SerializedName("rectangle")
+    public ArrayList<Rectangle> rectangle;
 
     @ElementList(entry="meter", inline=true)
-    public ArrayList<Meter> meters;
+    @SerializedName("meter")
+    public ArrayList<Meter> meter;
 
     @ElementList(entry="archedbargraph", inline=true)
-    public ArrayList<ArchedBarGraph> archedBarGraphs;
+    @SerializedName("archedbargraph")
+    public ArrayList<ArchedBarGraph> archedBarGraph;
 
     @ElementList(entry="picturegraphic", inline=true)
-    public ArrayList<PictureGraphic> pictureGraphics;
+    @SerializedName("picturegraphic")
+    public ArrayList<PictureGraphic> pictureGraphic;
 
     @ElementList(entry="numbervariable", inline=true)
-    public ArrayList<NumberVariable> numberVariables;
+    @SerializedName("numbervariable")
+    public ArrayList<NumberVariable> numberVariable;
 
     @ElementList(entry="lineattributes", inline=true)
-    public ArrayList<LineAttributes> lineAttributeses;
+    @SerializedName("lineattributes")
+    public ArrayList<LineAttributes> lineAttributese;
 
     @ElementList(entry="inputattributes", inline=true)
-    public ArrayList<InputAttributes> inputAttributeses;
+    @SerializedName("inputattributes")
+    public ArrayList<InputAttributes> inputAttributese;
 
     @ElementList(entry="outputstring", inline=true)
-    public ArrayList<OutputString> outputStrings;
+    @SerializedName("outputstring")
+    public ArrayList<OutputString> outputString;
 
     @ElementList(entry="objectpointer", inline=true)
-    public ArrayList<ObjectPointer> objectPointers;
+    @SerializedName("objectpointer")
+    public ArrayList<ObjectPointer> objectPointer;
 
     @ElementList(entry="ellipse", inline=true)
-    public ArrayList<Ellipse> ellipses;
+    @SerializedName("ellipse")
+    public ArrayList<Ellipse> ellipse;
 
     @ElementList(entry="linearbargraph", inline=true)
-    public ArrayList<LinearBarGraph> linearBarGraphs;
+    @SerializedName("linearbargraph")
+    public ArrayList<LinearBarGraph> linearBarGraph;
 
     @ElementList(entry="softkeymask", inline=true)
-    public ArrayList<SoftKeyMask> softKeyMasks;
+    @SerializedName("softkeymask")
+    public ArrayList<SoftKeyMask> softKeyMask;
 
     public ObjectPool(){
 

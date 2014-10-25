@@ -1,5 +1,7 @@
 package com.candroid.app.dto;
 
+import com.google.gson.annotations.SerializedName;
+
 import org.simpleframework.xml.Attribute;
 import org.simpleframework.xml.Element;
 import org.simpleframework.xml.ElementList;
@@ -26,9 +28,11 @@ public class WorkingSet {
     public String active_mask;
 
     @Element(name="outputstring")
-    public OutputString outputstring;
+    @SerializedName("outputstring")
+    public ArrayList<OutputString> outputstring;
 
     @ElementList(name="language", inline=true)
+    @SerializedName("language")
     public ArrayList<Language> languages;
 
 }

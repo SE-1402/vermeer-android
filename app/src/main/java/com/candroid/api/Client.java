@@ -40,13 +40,12 @@ public class Client {
                     if (!BuildConfig.DEBUG) {
                         mConnection.sendTextMessage("connect");
                     } else {
-                        mConnection.sendTextMessage("test");
+                        mConnection.sendTextMessage("connect");
                     }
                 }
 
                 @Override
                 public void onTextMessage(String payload) {
-                    // TODO: Payload to POJO objects!
                     if (payload.contains("workingset")) {
                         ObjectPool objectPool = gson.fromJson(payload, ObjectPool.class);
                         ((MainActivity) activity).initDisplay(objectPool);

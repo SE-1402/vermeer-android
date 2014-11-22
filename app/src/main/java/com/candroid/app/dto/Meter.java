@@ -1,12 +1,14 @@
 package com.candroid.app.dto;
 
+import com.google.gson.annotations.SerializedName;
+
 import org.simpleframework.xml.Attribute;
 import org.simpleframework.xml.Root;
 
-@Root(name="meter")
+import java.util.ArrayList;
+
+@Root(name = "meter")
 public class Meter {
-    @Attribute
-    private String name;
 
     @Attribute
     private int id;
@@ -14,29 +16,20 @@ public class Meter {
     @Attribute
     private int width;
 
-    @Attribute(required=false)
-    private int height;
+    @Attribute
+    private int needle_colour;
 
     @Attribute
-    private int min_value;
+    private int border_colour;
 
     @Attribute
-    private int max_value;
+    private int arc_and_tick_colour;
 
     @Attribute
-    private String needle_colour;
-
-    @Attribute
-    private String border_colour;
-
-    @Attribute
-    private String arc_and_tick_colour;
+    private int options;
 
     @Attribute
     private int number_of_ticks;
-
-    @Attribute
-    private String options;
 
     @Attribute
     private int start_angle;
@@ -45,9 +38,17 @@ public class Meter {
     private int end_angle;
 
     @Attribute
-    private int value;
+    private int min_value;
 
     @Attribute
-    private String variable_reference;
+    private int max_value;
 
+    @Attribute
+    private int variable_reference;
+
+    @Attribute
+    private int value;
+
+    @SerializedName("include_macros")
+    public ArrayList<IncludeMacro> include_Include_macros;
 }

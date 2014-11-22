@@ -7,34 +7,24 @@ import org.simpleframework.xml.Root;
 
 import java.util.ArrayList;
 
-@Root(name="button")
-public class Button {
+@Root(name = "font_attributes")
+public class FontAttributes {
 
     @Attribute
-    public int id;
+    private int id;
 
     @Attribute
-    public int width;
+    private int font_colour;
 
     @Attribute
-    public int height;
+    private int font_size;
 
     @Attribute
-    public int background_colour;
+    private int font_type;
 
     @Attribute
-    public int border_colour;
-
-    @Attribute
-    public int key_code;
-
-    @Attribute
-    public int options;
-
-    @SerializedName("include_objects")
-    public ArrayList<IncludeObject> include_Include_objects;
+    private int font_style;
 
     @SerializedName("include_macros")
     public ArrayList<IncludeMacro> include_Include_macros;
-
 }

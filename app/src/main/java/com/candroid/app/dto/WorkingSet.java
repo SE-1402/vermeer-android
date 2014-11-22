@@ -9,30 +9,34 @@ import org.simpleframework.xml.Root;
 
 import java.util.ArrayList;
 
-@Root(name="workingset")
+@Root(name="working_set")
 public class WorkingSet {
-
-    @Attribute
-    public String name;
 
     @Attribute
     public int id;
 
     @Attribute
-    public String background_colour;
+    public int background_colour;
 
     @Attribute
-    public int selectable;
+    public boolean selectable;
 
     @Attribute
-    public String active_mask;
+    public int active_mask;
 
-    @Element(name="outputstring")
-    @SerializedName("outputstring")
-    public ArrayList<OutputString> outputstring;
+    @Attribute
+    public String name;
 
-    @ElementList(name="language", inline=true)
-    @SerializedName("language")
-    public ArrayList<Language> languages;
+    @Element(name="include_objects")
+    @SerializedName("include_objects")
+    public ArrayList<IncludeObject> include_Include_objects;
+
+    @Element(name="include_macros")
+    @SerializedName("include_macros")
+    public ArrayList<IncludeMacro> include_Include_macros;
+
+    @ElementList(name="include_languages", inline=true)
+    @SerializedName("include_languages")
+    public ArrayList<Language> include_languages;
 
 }

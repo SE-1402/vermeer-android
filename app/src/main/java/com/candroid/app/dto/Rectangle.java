@@ -1,16 +1,20 @@
 package com.candroid.app.dto;
 
+import com.google.gson.annotations.SerializedName;
+
 import org.simpleframework.xml.Attribute;
 import org.simpleframework.xml.Root;
 
-@Root(name="rectangle")
+import java.util.ArrayList;
+
+@Root(name = "rectangle")
 public class Rectangle {
 
     @Attribute
-    private String name;
+    private int id;
 
     @Attribute
-    private int id;
+    private int line_attributes;
 
     @Attribute
     private int width;
@@ -19,12 +23,12 @@ public class Rectangle {
     private int height;
 
     @Attribute
-    private String line_attributes;
+    private int line_suppression;
 
     @Attribute
-    private String fill_attributes;
+    private int fill_attributes;
 
-    @Attribute
-    private String line_suppression;
+    @SerializedName("include_macros")
+    public ArrayList<IncludeMacro> include_Include_macros;
 
 }

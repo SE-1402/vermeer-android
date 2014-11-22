@@ -7,32 +7,20 @@ import org.simpleframework.xml.Root;
 
 import java.util.ArrayList;
 
-@Root(name = "ellipse")
-public class Ellipse {
+@Root(name = "fill_attributes")
+public class FillAttributes {
 
     @Attribute
     private int id;
 
     @Attribute
-    private String line_attributes;
+    private int fill_type;
 
     @Attribute
-    private int width;
+    private int fill_colour;
 
     @Attribute
-    private int height;
-
-    @Attribute
-    private int ellipse_type;
-
-    @Attribute
-    private int start_angle;
-
-    @Attribute
-    private int end_angle;
-
-    @Attribute
-    private int fill_attributes;
+    private int font_pattern;
 
     @SerializedName("include_macros")
     public ArrayList<IncludeMacro> include_Include_macros;

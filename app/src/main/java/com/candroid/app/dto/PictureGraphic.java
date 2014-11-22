@@ -1,13 +1,14 @@
 package com.candroid.app.dto;
 
+import com.google.gson.annotations.SerializedName;
+
 import org.simpleframework.xml.Attribute;
 import org.simpleframework.xml.Root;
 
-@Root(name="picturegraphic")
-public class PictureGraphic {
+import java.util.ArrayList;
 
-    @Attribute
-    private String name;
+@Root(name = "picture_graphic")
+public class PictureGraphic {
 
     @Attribute
     private int id;
@@ -15,34 +16,28 @@ public class PictureGraphic {
     @Attribute
     private int width;
 
-    @Attribute(required=false)
-    private String height;
+    @Attribute
+    private int actual_width;
 
     @Attribute
-    private String options;
+    private int actual_height;
 
     @Attribute
-    private String transparency_colour;
+    private int options;
 
     @Attribute
-    private String file1;
+    private int format;
 
     @Attribute
-    private String file4;
+    private int transparency_colour;
 
-    @Attribute
-    private String file8;
+    @Attribute(required = false)
+    private int number_of_bytes;
 
-    @Attribute
-    private int abs_path1;
+    @SerializedName("raw_data")
+    public ArrayList<Integer> raw_data;
 
-    @Attribute
-    private int abs_path4;
-
-    @Attribute
-    private int abs_path8;
-
-    @Attribute(required=false)
-    private String number_of_bytes;
+    @SerializedName("include_macros")
+    public ArrayList<IncludeMacro> include_Include_macros;
 
 }

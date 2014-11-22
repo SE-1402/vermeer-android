@@ -25,7 +25,7 @@ import com.candroid.app.dto.DataMask;
 import com.candroid.app.dto.IncludeObject;
 import com.candroid.app.dto.InputNumber;
 import com.candroid.app.dto.Key;
-import com.candroid.app.dto.Macro;
+import com.candroid.app.dto.IncludeMacro;
 import com.candroid.app.dto.ObjectPool;
 import com.candroid.app.dto.OutputNumber;
 import com.candroid.app.dto.OutputString;
@@ -118,8 +118,8 @@ public class UIBuilder {
             createVTDataMask(objectPool, vtDataMask);
         }
         // B.16 Macro Objects:
-        for (Macro vtMacro : objectPool.macro) {
-            createVTMacro(objectPool, vtMacro);
+        for (IncludeMacro vtIncludeMacro : objectPool.includeMacro) {
+            createVTMacro(objectPool, vtIncludeMacro);
         }
         // B.6 Key Object:
         for (Key vtKey : objectPool.key) {
@@ -168,9 +168,9 @@ public class UIBuilder {
         }
     }
 
-    private void createVTMacro(final ObjectPool objectPool, final Macro vtMacro) {
+    private void createVTMacro(final ObjectPool objectPool, final IncludeMacro vtIncludeMacro) {
         View.OnClickListener command = null;
-        if (vtMacro.command_change_numeric_value != null) {
+        if (vtIncludeMacro.command_change_numeric_value != null) {
             command = new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -179,17 +179,17 @@ public class UIBuilder {
                     }
                 }
             };
-        } else if (vtMacro.command_change_active_mask != null) {
+        } else if (vtIncludeMacro.command_change_active_mask != null) {
             command = new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    if (objectPool.workingset.name.equals(vtMacro.command_change_active_mask.working_set_object_id)) {
-                        setDataMask(vtMacro.command_change_active_mask.new_active_mask_object_id);
+                    if (objectPool.workingset.name.equals(vtIncludeMacro.command_change_active_mask.working_set_object_id)) {
+                        setDataMask(vtIncludeMacro.command_change_active_mask.new_active_mask_object_id);
                     }
                 }
             };
         }
-        macrosList.put(vtMacro.name, command);
+        macrosList.put(vtIncludeMacro.name, command);
     }
 
     private void createVTKey(Key vtKey) {
@@ -275,7 +275,7 @@ public class UIBuilder {
         } else if (vtContainer.hidden == 1) {
             uiLayout.setVisibility(View.INVISIBLE);
         }
-        for (IncludeObject includeObject : vtContainer.includeObject) {
+        for (IncludeObject includeObject : vtContainer.object) {
             for (View viewItem : viewsList) {
                 if (viewItem.getTag().equals(includeObject.name)) {
                     RelativeLayout.LayoutParams params = (RelativeLayout.LayoutParams) viewItem.getLayoutParams();
@@ -320,7 +320,7 @@ public class UIBuilder {
                 .setName(vtSoftKeyMask.name)
                 .setBackgroundColor(vtSoftKeyMask.background_colour);
 
-        for (IncludeObject includeObject : vtSoftKeyMask.includeObject) {
+        for (IncludeObject includeObject : vtSoftKeyMask.object) {
             for (View key : viewsList) {
                 if (key.getTag().equals(includeObject.name)) {
                     softKeyMaskFragment.addIncludeObject(key);

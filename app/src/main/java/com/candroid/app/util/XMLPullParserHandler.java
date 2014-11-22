@@ -1,6 +1,6 @@
 package com.candroid.app.util;
 
-import com.candroid.app.dto.Macro;
+import com.candroid.app.dto.IncludeMacro;
 
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
@@ -13,15 +13,15 @@ import java.util.List;
 
 public class XMLPullParserHandler {
 
-    List<Macro> macros;
-    private Macro macro;
+    List<IncludeMacro> includeMacros;
+    private IncludeMacro includeMacro;
     private String text;
 
     public XMLPullParserHandler() {
-        macros = new ArrayList<Macro>();
+        includeMacros = new ArrayList<IncludeMacro>();
     }
 
-    public List<Macro> parse(InputStream is) {
+    public List<IncludeMacro> parse(InputStream is) {
         XmlPullParserFactory factory = null;
         XmlPullParser parser = null;
         try {
@@ -37,7 +37,7 @@ public class XMLPullParserHandler {
                 switch (eventType) {
                     case XmlPullParser.START_TAG:
                         if (tagName.equalsIgnoreCase("macro")) {
-                            macro = new Macro();
+                            includeMacro = new IncludeMacro();
                         }
                         break;
                     case XmlPullParser.TEXT:
@@ -46,7 +46,7 @@ public class XMLPullParserHandler {
                     case XmlPullParser.END_TAG:
                         if (tagName.equalsIgnoreCase("macro")) {
                             // Add Macro to list
-                            macros.add(macro);
+                            includeMacros.add(includeMacro);
                         } else if (tagName.equalsIgnoreCase("name")) {
                             //macro.setName(text);
                         }
@@ -62,10 +62,10 @@ public class XMLPullParserHandler {
             e.printStackTrace();
         }
 
-        return macros;
+        return includeMacros;
     }
 
-    public List<Macro> getMacros() {
-        return macros;
+    public List<IncludeMacro> getIncludeMacros() {
+        return includeMacros;
     }
 }

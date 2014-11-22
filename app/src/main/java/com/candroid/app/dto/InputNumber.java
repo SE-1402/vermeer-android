@@ -1,13 +1,14 @@
 package com.candroid.app.dto;
 
+import com.google.gson.annotations.SerializedName;
+
 import org.simpleframework.xml.Attribute;
 import org.simpleframework.xml.Root;
 
-@Root(name="inputnumber")
-public class InputNumber {
+import java.util.ArrayList;
 
-    @Attribute
-    public String name;
+@Root(name = "input_number")
+public class InputNumber {
 
     @Attribute
     public int id;
@@ -19,13 +20,19 @@ public class InputNumber {
     public int height;
 
     @Attribute
-    public String background_colour;
+    public int background_colour;
 
     @Attribute
-    public String font_attributes;
+    public int font_attributes;
 
     @Attribute
-    public String options;
+    public int options;
+
+    @Attribute
+    public int variable_reference;
+
+    @Attribute
+    public int value;
 
     @Attribute
     public int min_value;
@@ -37,26 +44,20 @@ public class InputNumber {
     public int offset;
 
     @Attribute
-    public int scale;
+    public float scale;
 
     @Attribute
     public int number_of_decimals;
 
     @Attribute
-    public String format;
+    public int format;
 
     @Attribute
-    public String horizontal_justification;
+    public int justification;
 
     @Attribute
-    public String vertical_justification;
+    public int options_2;
 
-    @Attribute
-    public String inputobject_options;
-
-    @Attribute
-    public int value;
-
-    @Attribute
-    public String variable_reference;
+    @SerializedName("include_macros")
+    public ArrayList<IncludeMacro> include_Include_macros;
 }

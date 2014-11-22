@@ -4,10 +4,7 @@ import org.simpleframework.xml.Attribute;
 import org.simpleframework.xml.Root;
 
 @Root(name="include_object")
-public class IncludeObject {
-
-    @Attribute
-    public int id;
+public class Point {
 
     @Attribute(required=false)
     public int pos_x;

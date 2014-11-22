@@ -7,34 +7,24 @@ import org.simpleframework.xml.Root;
 
 import java.util.ArrayList;
 
-@Root(name="button")
-public class Button {
+@Root(name = "rectangle")
+public class Line {
 
     @Attribute
-    public int id;
+    private int id;
 
     @Attribute
-    public int width;
+    private int line_attributes;
 
     @Attribute
-    public int height;
+    private int width;
 
     @Attribute
-    public int background_colour;
+    private int height;
 
     @Attribute
-    public int border_colour;
-
-    @Attribute
-    public int key_code;
-
-    @Attribute
-    public int options;
-
-    @SerializedName("include_objects")
-    public ArrayList<IncludeObject> include_Include_objects;
+    private int line_direction;
 
     @SerializedName("include_macros")
     public ArrayList<IncludeMacro> include_Include_macros;
-
 }

@@ -36,7 +36,7 @@ android {
             buildConfigField "boolean", "USE_CRASHLYTICS", "true"
             ext.enableCrashlytics = true
             buildConfigField "boolean", "MOCK", "false"
-            buildConfigField "String", "WS_URI", "\"ws://10.26.41.92:9000\""
+            buildConfigField "String", "WS_URI", "\"ws://192.168.8.1:9000\""
         }
         debug {
             applicationIdSuffix ".debug"
@@ -44,7 +44,16 @@ android {
             buildConfigField "boolean", "USE_CRASHLYTICS", "false"
             ext.enableCrashlytics = false
             buildConfigField "boolean", "MOCK", "false"
-            buildConfigField "String", "WS_URI", "\"ws://192.168.1.101:9000\""
+            buildConfigField "String", "WS_URI", "\"ws://192.168.8.1:9000\""
+        }
+        local.initWith(buildTypes.debug)
+        local {
+            applicationIdSuffix ".debug"
+            debuggable true
+            buildConfigField "boolean", "USE_CRASHLYTICS", "false"
+            ext.enableCrashlytics = false
+            buildConfigField "boolean", "MOCK", "false"
+            buildConfigField "String", "WS_URI", "\"ws://10.26.41.107:9000\""
         }
         mock.initWith(buildTypes.debug)
         mock {
@@ -53,7 +62,7 @@ android {
             buildConfigField "boolean", "USE_CRASHLYTICS", "false"
             ext.enableCrashlytics = false
             buildConfigField "boolean", "MOCK", "true"
-            buildConfigField "String", "WS_URI", "\"ws://10.26.41.92:9000\""
+            buildConfigField "String", "WS_URI", "\"ws://192.168.8.1:9000\""
         }
     }
 }

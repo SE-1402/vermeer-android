@@ -7,34 +7,27 @@ import org.simpleframework.xml.Root;
 
 import java.util.ArrayList;
 
-@Root(name="button")
-public class Button {
+@Root(name = "input_boolean")
+public class InputBoolean {
 
     @Attribute
     public int id;
 
     @Attribute
-    public int width;
-
-    @Attribute
-    public int height;
-
-    @Attribute
     public int background_colour;
 
     @Attribute
-    public int border_colour;
+    public int width;
 
     @Attribute
-    public int key_code;
+    public int foreground_color;
 
     @Attribute
-    public int options;
+    public int variable_reference;
 
-    @SerializedName("include_objects")
-    public ArrayList<IncludeObject> include_Include_objects;
+    @Attribute
+    public int enabled;
 
     @SerializedName("include_macros")
     public ArrayList<IncludeMacro> include_Include_macros;
-
 }

@@ -1,23 +1,27 @@
 package com.candroid.app.dto;
 
+import com.google.gson.annotations.SerializedName;
+
 import org.simpleframework.xml.Attribute;
 import org.simpleframework.xml.Root;
 
-@Root(name="lineattributes")
-public class LineAttributes {
+import java.util.ArrayList;
 
-    @Attribute
-    private String name;
+@Root(name = "line_attributes")
+public class LineAttributes {
 
     @Attribute
     private int id;
 
     @Attribute
-    private String line_art;
-
-    @Attribute
-    private String line_colour;
+    private int line_colour;
 
     @Attribute
     private int line_width;
+
+    @Attribute
+    private int line_art;
+
+    @SerializedName("include_macros")
+    public ArrayList<IncludeMacro> include_Include_macros;
 }

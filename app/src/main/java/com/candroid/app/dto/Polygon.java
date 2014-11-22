@@ -7,32 +7,29 @@ import org.simpleframework.xml.Root;
 
 import java.util.ArrayList;
 
-@Root(name="button")
-public class Button {
+@Root(name = "polygon")
+public class Polygon {
 
     @Attribute
-    public int id;
+    private int id;
 
     @Attribute
-    public int width;
+    private int width;
 
     @Attribute
-    public int height;
+    private int height;
 
     @Attribute
-    public int background_colour;
+    private int line_attributes;
 
     @Attribute
-    public int border_colour;
+    private int fill_attributes;
 
     @Attribute
-    public int key_code;
+    private int polygon_type;
 
-    @Attribute
-    public int options;
-
-    @SerializedName("include_objects")
-    public ArrayList<IncludeObject> include_Include_objects;
+    @SerializedName("include_points")
+    public ArrayList<Point> include_points;
 
     @SerializedName("include_macros")
     public ArrayList<IncludeMacro> include_Include_macros;

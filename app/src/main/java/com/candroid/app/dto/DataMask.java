@@ -8,23 +8,24 @@ import org.simpleframework.xml.Root;
 
 import java.util.ArrayList;
 
-@Root(name="datamask")
+@Root(name="data_mask")
 public class DataMask {
-
-    @Attribute
-    public String name;
 
     @Attribute
     public int id;
 
     @Attribute
-    public String background_colour;
+    public int background_colour;
 
     @Attribute
-    public String soft_key_mask;
+    public int soft_key_mask;
 
-    @ElementList(name="include_object", required=false, inline=true)
-    @SerializedName("include_object")
-    public ArrayList<IncludeObject> includeObject;
+    @ElementList(name="include_objects", required=false, inline=true)
+    @SerializedName("include_objects")
+    public ArrayList<IncludeObject> include_Include_objects;
+
+    @ElementList(name="include_macros", required=false, inline=true)
+    @SerializedName("include_macros")
+    public ArrayList<IncludeMacro> include_Include_macros;
 
 }

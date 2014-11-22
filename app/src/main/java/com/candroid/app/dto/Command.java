@@ -3,13 +3,9 @@ package com.candroid.app.dto;
 import org.simpleframework.xml.Attribute;
 import org.simpleframework.xml.Root;
 
-@Root(name="number_variable")
-public class NumberVariable {
+@Root(name = "command")
+public class Command {
 
     @Attribute
-    private int id;
-
-    @Attribute
-    private int value;
-
+    public int id;
 }

@@ -1,26 +1,27 @@
 package com.candroid.app.dto;
 
+import com.google.gson.annotations.SerializedName;
+
 import org.simpleframework.xml.Attribute;
 import org.simpleframework.xml.Root;
 
-@Root(name="inputattributes")
-public class InputAttributes {
+import java.util.ArrayList;
 
-    @Attribute
-    private String name;
+@Root(name = "input_attributes")
+public class InputAttributes {
 
     @Attribute
     private int id;
 
     @Attribute
-    private String validation_type;
-
-    @Attribute
-    private String validation_string;
+    private int validation_type;
 
     @Attribute
     private int length;
 
     @Attribute
-    private int auto_set_length;
+    private String validation_string;
+
+    @SerializedName("include_macros")
+    public ArrayList<IncludeMacro> include_Include_macros;
 }

@@ -7,8 +7,8 @@ import org.simpleframework.xml.Root;
 
 import java.util.ArrayList;
 
-@Root(name="button")
-public class Button {
+@Root(name = "input_list")
+public class InputList {
 
     @Attribute
     public int id;
@@ -20,21 +20,17 @@ public class Button {
     public int height;
 
     @Attribute
-    public int background_colour;
+    public int variable_reference;
 
     @Attribute
-    public int border_colour;
+    public int value;
 
     @Attribute
-    public int key_code;
+    public int number_of_list_items;
 
     @Attribute
     public int options;
 
-    @SerializedName("include_objects")
-    public ArrayList<IncludeObject> include_Include_objects;
-
     @SerializedName("include_macros")
     public ArrayList<IncludeMacro> include_Include_macros;
-
 }

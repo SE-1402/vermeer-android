@@ -12,86 +12,126 @@ import java.util.ArrayList;
 public class ObjectPool {
 
     @Element
-    @SerializedName("workingset")
-    public WorkingSet workingset;
+    @SerializedName("working_set")
+    public WorkingSet working_set;
 
-    @ElementList(entry="macro", inline=true)
-    @SerializedName("macro")
-    public ArrayList<Macro> macro;
+    @ElementList(entry = "data_mask", inline = true)
+    @SerializedName("data_mask")
+    public ArrayList<DataMask> data_mask;
 
-    @ElementList(entry="datamask", inline=true)
-    @SerializedName("datamask")
-    public ArrayList<DataMask> dataMask;
+    @ElementList(entry = "alarm_mask", inline = true)
+    @SerializedName("alarm_mask")
+    public ArrayList<AlarmMask> alarm_mask;
 
-    @ElementList(entry="container", inline=true)
+    @ElementList(entry = "container", inline = true)
     @SerializedName("container")
     public ArrayList<Container> container;
 
-    @ElementList(entry="key", inline=true)
+    @ElementList(entry = "soft_key_mask", inline = true)
+    @SerializedName("soft_key_mask")
+    public ArrayList<SoftKeyMask> soft_key_mask;
+
+    @ElementList(entry = "key", inline = true)
     @SerializedName("key")
     public ArrayList<Key> key;
 
-    @ElementList(entry="button", inline=true)
+    @ElementList(entry = "button", inline = true)
     @SerializedName("button")
     public ArrayList<Button> button;
 
-    @ElementList(entry="inputnumber", inline=true)
-    @SerializedName("inputnumber")
-    public ArrayList<InputNumber> inputNumber;
+    @ElementList(entry = "input_boolean", inline = true)
+    @SerializedName("input_boolean")
+    public ArrayList<InputBoolean> input_boolean;
 
-    @ElementList(entry="outputnumber", inline=true)
-    @SerializedName("outputnumber")
-    public ArrayList<OutputNumber> outputNumber;
+    @ElementList(entry = "input_string", inline = true)
+    @SerializedName("input_string")
+    public ArrayList<InputString> input_string;
 
-    @ElementList(entry="rectangle", inline=true)
+    @ElementList(entry = "input_number", inline = true)
+    @SerializedName("input_number")
+    public ArrayList<InputNumber> input_number;
+
+    @ElementList(entry = "input_list", inline = true)
+    @SerializedName("input_list")
+    public ArrayList<InputList> input_list;
+
+    @ElementList(entry = "output_string", inline = true)
+    @SerializedName("output_string")
+    public ArrayList<OutputString> output_string;
+
+    @ElementList(entry = "output_number", inline = true)
+    @SerializedName("output_number")
+    public ArrayList<OutputNumber> output_number;
+
+    @ElementList(entry = "output_list", inline = true)
+    @SerializedName("output_list")
+    public ArrayList<OutputList> output_list;
+
+    @ElementList(entry = "line", inline = true)
+    @SerializedName("line")
+    public ArrayList<Line> line;
+
+    @ElementList(entry = "rectangle", inline = true)
     @SerializedName("rectangle")
     public ArrayList<Rectangle> rectangle;
 
-    @ElementList(entry="meter", inline=true)
-    @SerializedName("meter")
-    public ArrayList<Meter> meter;
-
-    @ElementList(entry="archedbargraph", inline=true)
-    @SerializedName("archedbargraph")
-    public ArrayList<ArchedBarGraph> archedBarGraph;
-
-    @ElementList(entry="picturegraphic", inline=true)
-    @SerializedName("picturegraphic")
-    public ArrayList<PictureGraphic> pictureGraphic;
-
-    @ElementList(entry="numbervariable", inline=true)
-    @SerializedName("numbervariable")
-    public ArrayList<NumberVariable> numberVariable;
-
-    @ElementList(entry="lineattributes", inline=true)
-    @SerializedName("lineattributes")
-    public ArrayList<LineAttributes> lineAttributese;
-
-    @ElementList(entry="inputattributes", inline=true)
-    @SerializedName("inputattributes")
-    public ArrayList<InputAttributes> inputAttributese;
-
-    @ElementList(entry="outputstring", inline=true)
-    @SerializedName("outputstring")
-    public ArrayList<OutputString> outputString;
-
-    @ElementList(entry="objectpointer", inline=true)
-    @SerializedName("objectpointer")
-    public ArrayList<ObjectPointer> objectPointer;
-
-    @ElementList(entry="ellipse", inline=true)
+    @ElementList(entry = "ellipse", inline = true)
     @SerializedName("ellipse")
     public ArrayList<Ellipse> ellipse;
 
-    @ElementList(entry="linearbargraph", inline=true)
-    @SerializedName("linearbargraph")
-    public ArrayList<LinearBarGraph> linearBarGraph;
+    @ElementList(entry = "polygon", inline = true)
+    @SerializedName("polygon")
+    public ArrayList<Polygon> polygon;
 
-    @ElementList(entry="softkeymask", inline=true)
-    @SerializedName("softkeymask")
-    public ArrayList<SoftKeyMask> softKeyMask;
+    @ElementList(entry = "meter", inline = true)
+    @SerializedName("meter")
+    public ArrayList<Meter> meter;
 
-    public ObjectPool(){
+    @ElementList(entry = "linear_bar_graph", inline = true)
+    @SerializedName("linear_bar_graph")
+    public ArrayList<LinearBarGraph> linear_bar_graph;
 
-    };
+    @ElementList(entry = "arched_bar_graph", inline = true)
+    @SerializedName("arched_bar_graph")
+    public ArrayList<ArchedBarGraph> arched_bar_graph;
+
+    @ElementList(entry = "picture_graphic", inline = true)
+    @SerializedName("picture_graphic")
+    public ArrayList<PictureGraphic> picture_graphic;
+
+    @ElementList(entry = "number_variable", inline = true)
+    @SerializedName("number_variable")
+    public ArrayList<NumberVariable> number_variable;
+
+    @ElementList(entry = "string_variable", inline = true)
+    @SerializedName("string_variable")
+    public ArrayList<StringVariable> string_variable;
+
+    @ElementList(entry = "font_attributes", inline = true)
+    @SerializedName("font_attributes")
+    public ArrayList<FontAttributes> font_attributes;
+
+    @ElementList(entry = "line_attributes", inline = true)
+    @SerializedName("line_attributes")
+    public ArrayList<LineAttributes> line_attributes;
+
+    @ElementList(entry = "fill_attributes", inline = true)
+    @SerializedName("fill_attributes")
+    public ArrayList<FillAttributes> fill_attributes;
+
+    @ElementList(entry = "input_attributes", inline = true)
+    @SerializedName("input_attributes")
+    public ArrayList<InputAttributes> input_attributes;
+
+    @ElementList(entry = "object_pointer", inline = true)
+    @SerializedName("object_pointer")
+    public ArrayList<ObjectPointer> object_pointer;
+
+    @ElementList(entry = "macro", inline = true)
+    @SerializedName("macro")
+    public ArrayList<IncludeMacro> includeMacro;
+
+    public ObjectPool() {
+
+    }
 }

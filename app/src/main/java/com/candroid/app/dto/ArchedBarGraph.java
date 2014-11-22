@@ -1,12 +1,14 @@
 package com.candroid.app.dto;
 
+import com.google.gson.annotations.SerializedName;
+
 import org.simpleframework.xml.Attribute;
 import org.simpleframework.xml.Root;
 
-@Root(name="archedbargraph")
+import java.util.ArrayList;
+
+@Root(name = "arched_bar_graph")
 public class ArchedBarGraph {
-    @Attribute
-    private String name;
 
     @Attribute
     private int id;
@@ -15,25 +17,16 @@ public class ArchedBarGraph {
     private int width;
 
     @Attribute
-    private int bar_graph_width;
-
-    @Attribute
     private int height;
 
     @Attribute
-    private int min_value;
+    private int colour;
 
     @Attribute
-    private int max_value;
+    private int target_line_colour;
 
     @Attribute
-    private String colour;
-
-    @Attribute
-    private String target_line_colour;
-
-    @Attribute
-    private String options;
+    private int options;
 
     @Attribute
     private int start_angle;
@@ -42,15 +35,26 @@ public class ArchedBarGraph {
     private int end_angle;
 
     @Attribute
+    private int bar_graph_width;
+
+    @Attribute
+    private int min_value;
+
+    @Attribute
+    private int max_value;
+
+    @Attribute
+    private int variable_reference;
+
+    @Attribute
     private int value;
 
     @Attribute
-    private String variable_reference;
+    private int target_value_variable_reference;
 
     @Attribute
     private int target_value;
 
-    @Attribute
-    private String target_value_variable_reference;
-
+    @SerializedName("include_macros")
+    public ArrayList<IncludeMacro> include_Include_macros;
 }

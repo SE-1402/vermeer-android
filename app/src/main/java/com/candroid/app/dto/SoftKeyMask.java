@@ -8,11 +8,8 @@ import org.simpleframework.xml.Root;
 
 import java.util.ArrayList;
 
-@Root(name="softkeymask")
+@Root(name = "soft_key_mask")
 public class SoftKeyMask {
-
-    @Attribute
-    public String name;
 
     @Attribute
     public int id;
@@ -20,7 +17,12 @@ public class SoftKeyMask {
     @Attribute
     public int background_colour;
 
-    @ElementList(name="include_object", inline=true)
-    @SerializedName("include_object")
-    public ArrayList<IncludeObject> includeObject;
+    @ElementList(name = "include_objects", inline = true)
+    @SerializedName("include_objects")
+    public ArrayList<IncludeObject> include_Include_objects;
+
+    @ElementList(name = "include_macros", inline = true)
+    @SerializedName("include_macros")
+    public ArrayList<IncludeMacro> include_Include_macros;
+
 }

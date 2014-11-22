@@ -1,19 +1,17 @@
 package com.candroid.app.dto;
 
+import com.google.gson.annotations.SerializedName;
+
 import org.simpleframework.xml.Attribute;
 import org.simpleframework.xml.Root;
 
-@Root(name="outputstring")
+import java.util.ArrayList;
+
+@Root(name = "output_string")
 public class OutputString {
 
     @Attribute
-    public String name;
-
-    @Attribute
     public int id;
-
-    @Attribute(required=false)
-    public String language;
 
     @Attribute
     public int width;
@@ -22,35 +20,27 @@ public class OutputString {
     public int height;
 
     @Attribute
-    public String font_attributes;
+    public int background_colour;
 
     @Attribute
-    public String background_colour;
+    public int font_attributes;
 
     @Attribute
-    public String options;
+    public int options;
 
     @Attribute
-    public String horizontal_justification;
+    public int variable_reference;
 
     @Attribute
-    public String vertical_justification;
-
-    @Attribute
-    public String value;
+    public int justification;
 
     @Attribute
     public int length;
 
     @Attribute
-    public int auto_set_length;
+    public String value;
 
-    @Attribute
-    public String variable_reference;
+    @SerializedName("include_macros")
+    public ArrayList<IncludeMacro> include_Include_macros;
 
-    @Attribute(required=false)
-    public int pos_x;
-
-    @Attribute(required=false)
-    public int pos_y;
 }

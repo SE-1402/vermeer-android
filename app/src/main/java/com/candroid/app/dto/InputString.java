@@ -7,47 +7,44 @@ import org.simpleframework.xml.Root;
 
 import java.util.ArrayList;
 
-@Root(name = "linear_bar_graph")
-public class LinearBarGraph {
+@Root(name = "input_string")
+public class InputString {
 
     @Attribute
-    private int id;
+    public int id;
 
     @Attribute
-    private int width;
+    public int width;
 
     @Attribute
-    private int height;
+    public int height;
 
     @Attribute
-    private int colour;
+    public int background_colour;
 
     @Attribute
-    private int target_line_colour;
+    public int font_attributes;
 
     @Attribute
-    private int options;
+    public int input_attributes;
 
     @Attribute
-    private int number_of_ticks;
+    public int options;
 
     @Attribute
-    private int min_value;
+    public int variable_reference;
 
     @Attribute
-    private int max_value;
+    public int justification;
 
     @Attribute
-    private int variable_reference;
+    public int length;
 
     @Attribute
-    private int value;
+    public String value;
 
     @Attribute
-    private int target_value_variable_reference;
-
-    @Attribute
-    private int target_value;
+    public int enabled;
 
     @SerializedName("include_macros")
     public ArrayList<IncludeMacro> include_Include_macros;

@@ -46,7 +46,7 @@ public class Client {
 
                 @Override
                 public void onTextMessage(String payload) {
-                    if (payload.contains("workingset")) {
+                    if (payload.contains("working_set")) {
                         ObjectPool objectPool = gson.fromJson(payload, ObjectPool.class);
                         ((MainActivity) activity).initDisplay(objectPool);
                     }

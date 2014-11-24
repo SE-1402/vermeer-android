@@ -28,10 +28,10 @@ public class Polygon {
     @Attribute
     private int polygon_type;
 
-    @SerializedName("include_points")
-    public ArrayList<Point> include_points;
+    @SerializedName("include_point")
+    public ArrayList<Point> include_point;
 
-    @SerializedName("include_macros")
-    public ArrayList<IncludeMacro> include_Include_macros;
+    @SerializedName("include_macro")
+    public ArrayList<IncludeMacro> include_macro;
 
 }

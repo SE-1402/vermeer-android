@@ -20,11 +20,11 @@ public class Key {
     @Attribute
     public int key_code;
 
-    @ElementList(name="include_objects", required=false, inline=true)
-    @SerializedName("include_objects")
-    public ArrayList<IncludeObject> include_Include_objects;
+    @ElementList(name="include_object", required=false, inline=true)
+    @SerializedName("include_object")
+    public ArrayList<IncludeObject> include_object;
 
-    @ElementList(name="include_macros", required=false, inline=true)
-    @SerializedName("include_objects")
-    public ArrayList<IncludeMacro> include_Include_macros;
+    @ElementList(name="include_macro", required=false, inline=true)
+    @SerializedName("include_macro")
+    public ArrayList<IncludeMacro> include_macro;
 }

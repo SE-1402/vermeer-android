@@ -7,7 +7,7 @@ import org.simpleframework.xml.Root;
 
 import java.util.ArrayList;
 
-@Root(name = "input_attributes")
+@Root(name = "input_attribute")
 public class InputAttributes {
 
     @Attribute
@@ -22,6 +22,6 @@ public class InputAttributes {
     @Attribute
     private String validation_string;
 
-    @SerializedName("include_macros")
-    public ArrayList<IncludeMacro> include_Include_macros;
+    @SerializedName("include_macro")
+    public ArrayList<IncludeMacro> include_macro;
 }

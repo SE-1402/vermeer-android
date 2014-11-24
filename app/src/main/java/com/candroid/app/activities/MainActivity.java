@@ -120,9 +120,9 @@ public class MainActivity extends FragmentActivity implements DataMaskFragment.O
                     .createLayout(objectPool)
                     .initialize();
             // Set Current Masks
-            builder.setDataMask(objectPool.workingset.active_mask);
+            builder.setDataMask(objectPool.working_set.active_mask);
             // TODO: Bad idea to hardcode this value:
-            builder.setSoftKeyMaskLeft(objectPool.softKeyMask.get(0).name);
+            builder.setSoftKeyMaskRight(objectPool.soft_key_mask.get(0).id);
         } catch (IOException e) {
             e.printStackTrace();
         } catch (Exception e) {
@@ -136,9 +136,9 @@ public class MainActivity extends FragmentActivity implements DataMaskFragment.O
                     .createLayout(objectPool)
                     .initialize();
             // Set Current Masks
-            builder.setDataMask(objectPool.workingset.active_mask);
+            builder.setDataMask(objectPool.working_set.active_mask);
             // TODO: Bad idea to hardcode this value:
-            builder.setSoftKeyMaskLeft(objectPool.softKeyMask.get(0).name);
+            builder.setSoftKeyMaskLeft(objectPool.soft_key_mask.get(0).id);
         } catch (Exception e) {
             e.printStackTrace();
         }

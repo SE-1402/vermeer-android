@@ -27,16 +27,16 @@ public class WorkingSet {
     @Attribute
     public String name;
 
-    @Element(name="include_objects")
-    @SerializedName("include_objects")
-    public ArrayList<IncludeObject> include_Include_objects;
+    @Element(name="include_object")
+    @SerializedName("include_object")
+    public ArrayList<IncludeObject> include_object;
 
-    @Element(name="include_macros")
-    @SerializedName("include_macros")
-    public ArrayList<IncludeMacro> include_Include_macros;
+    @Element(name="include_macro")
+    @SerializedName("include_macro")
+    public ArrayList<IncludeMacro> include_macro;
 
-    @ElementList(name="include_languages", inline=true)
-    @SerializedName("include_languages")
-    public ArrayList<Language> include_languages;
+    @ElementList(name="include_language", inline=true)
+    @SerializedName("include_language")
+    public ArrayList<Language> include_language;
 
 }

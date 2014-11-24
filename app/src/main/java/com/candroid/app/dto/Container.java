@@ -23,11 +23,11 @@ public class Container {
     @Attribute
     public int hidden;
 
-    @ElementList(name="include_objects", required=false, inline=true)
-    @SerializedName("include_objects")
-    public ArrayList<IncludeObject> include_Include_objects;
+    @ElementList(name="include_object", required=false, inline=true)
+    @SerializedName("include_object")
+    public ArrayList<IncludeObject> include_object;
 
-    @ElementList(name="include_macros", required=false, inline=true)
-    @SerializedName("include_macros")
-    public ArrayList<IncludeObject> include_macros;
+    @ElementList(name="include_macro", required=false, inline=true)
+    @SerializedName("include_macro")
+    public ArrayList<IncludeObject> include_macro;
 }

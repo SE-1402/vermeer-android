@@ -37,7 +37,7 @@ public class PictureGraphic {
     @SerializedName("raw_data")
     public ArrayList<Integer> raw_data;
 
-    @SerializedName("include_macros")
-    public ArrayList<IncludeMacro> include_Include_macros;
+    @SerializedName("include_macro")
+    public ArrayList<IncludeMacro> include_macro;
 
 }

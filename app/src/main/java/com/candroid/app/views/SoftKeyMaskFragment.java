@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -29,15 +30,8 @@ public class SoftKeyMaskFragment extends Fragment {
     private static final String DATA_NAME = "soft_key_mask_name";
 
     private int id;
-    private String name;
-
-    public String getName() {
-        return name;
-    }
-
     private OnFragmentInteractionListener mListener;
 
-    private View view;
     private LinearLayout layout;
 
     private int color;
@@ -64,22 +58,26 @@ public class SoftKeyMaskFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        view = inflater.inflate(R.layout.fragment_soft_key_mask, container, false);
+        View view = inflater.inflate(R.layout.fragment_soft_key_mask, container, false);
         layout = (LinearLayout) view.findViewById(R.id.layout_soft_key_mask);
-        setBackgroundColor();
-        addIncludedObjects();
         return view;
     }
 
-    /* Helper Methods */
-    public SoftKeyMaskFragment setName(String name) {
-        this.name = name;
-        return this;
+    @Override
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        setBackgroundColor();
+        addIncludedObjects();
     }
 
+    /* Helper Methods */
     public SoftKeyMaskFragment setId(int id) {
         this.id = id;
         return this;
+    }
+
+    public int getMaskId(){
+        return this.id;
     }
 
     public SoftKeyMaskFragment setBackgroundColor(int color) {

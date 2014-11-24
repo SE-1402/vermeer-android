@@ -58,6 +58,6 @@ public class InputNumber {
     @Attribute
     public int options_2;
 
-    @SerializedName("include_macros")
-    public ArrayList<IncludeMacro> include_Include_macros;
+    @SerializedName("include_macro")
+    public ArrayList<IncludeMacro> include_macro;
 }

@@ -7,7 +7,7 @@ import org.simpleframework.xml.Root;
 
 import java.util.ArrayList;
 
-@Root(name = "line_attributes")
+@Root(name = "line_attribute")
 public class LineAttributes {
 
     @Attribute
@@ -22,6 +22,6 @@ public class LineAttributes {
     @Attribute
     private int line_art;
 
-    @SerializedName("include_macros")
-    public ArrayList<IncludeMacro> include_Include_macros;
+    @SerializedName("include_macro")
+    public ArrayList<IncludeMacro> include_macro;
 }

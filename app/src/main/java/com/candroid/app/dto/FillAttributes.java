@@ -7,7 +7,7 @@ import org.simpleframework.xml.Root;
 
 import java.util.ArrayList;
 
-@Root(name = "fill_attributes")
+@Root(name = "fill_attribute")
 public class FillAttributes {
 
     @Attribute
@@ -22,6 +22,6 @@ public class FillAttributes {
     @Attribute
     private int font_pattern;
 
-    @SerializedName("include_macros")
-    public ArrayList<IncludeMacro> include_Include_macros;
+    @SerializedName("include_macro")
+    public ArrayList<IncludeMacro> include_macro;
 }

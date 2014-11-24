@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -30,18 +31,14 @@ public class DataMaskFragment extends Fragment {
     private static final String DATA_NAME = "data_mask_name";
 
     private int id;
-    private String name;
-
-    public String getName() {
-        return name;
-    }
 
     private OnFragmentInteractionListener mListener;
 
     private View view;
     private RelativeLayout layout;
 
-    private String color;
+    private int color;
+    private int softKeyMaskId;
     private ArrayList<View> viewList = new ArrayList<View>();
 
     /**
@@ -66,35 +63,39 @@ public class DataMaskFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_data_mask, container, false);
-        layout = (RelativeLayout) view.findViewById(R.id.layout_data_mask);
-        setBackgroundColor();
-        addIncludedObjects();
+        layout = (RelativeLayout) view.findViewById(R.id.layout_data_mask_fragment);
         return view;
     }
 
-    /* Helper Methods */
-    public DataMaskFragment setName(String name) {
-        this.name = name;
-        return this;
+    @Override
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        setBackgroundColor();
+        addIncludedObjects();
     }
 
+    /* Helper Methods */
     public DataMaskFragment setId(int id) {
         this.id = id;
         return this;
     }
 
-    public DataMaskFragment setBackgroundColor(String color) {
+    public int getMaskId(){
+        return this.id;
+    }
+
+    public DataMaskFragment setBackgroundColor(int color) {
         this.color = color;
         return this;
     }
 
+    public DataMaskFragment setSoftKeyMaskId(int id) {
+        this.softKeyMaskId = id;
+        return this;
+    }
+
     private void setBackgroundColor() {
-        if (Convert.isNumeric(color)) {
-            layout.setBackgroundColor(getActivity().getResources().getColor(getActivity().getResources().getIdentifier("vt" + color, "color", getActivity().getPackageName())));
-        } else {
-            // Attempt to Parse Color:
-            layout.setBackgroundColor(Color.parseColor(color));
-        }
+        layout.setBackgroundColor(getActivity().getResources().getColor(getActivity().getResources().getIdentifier("vt" + color, "color", getActivity().getPackageName())));
     }
 
     public void addIncludeObject(View child) {

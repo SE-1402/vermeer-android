@@ -49,6 +49,6 @@ public class OutputNumber {
     @Attribute
     public int justification;
 
-    @SerializedName("include_macros")
-    public ArrayList<IncludeMacro> include_Include_macros;
+    @SerializedName("include_macro")
+    public ArrayList<IncludeMacro> include_macro;
 }

@@ -31,10 +31,10 @@ public class Button {
     @Attribute
     public int options;
 
-    @SerializedName("include_objects")
-    public ArrayList<IncludeObject> include_Include_objects;
+    @SerializedName("include_object")
+    public ArrayList<IncludeObject> include_object;
 
-    @SerializedName("include_macros")
-    public ArrayList<IncludeMacro> include_Include_macros;
+    @SerializedName("include_macro")
+    public ArrayList<IncludeMacro> include_macro;
 
 }

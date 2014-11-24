@@ -46,6 +46,6 @@ public class InputString {
     @Attribute
     public int enabled;
 
-    @SerializedName("include_macros")
-    public ArrayList<IncludeMacro> include_Include_macros;
+    @SerializedName("include_macro")
+    public ArrayList<IncludeMacro> include_macro;
 }

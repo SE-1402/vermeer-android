@@ -25,6 +25,6 @@ public class Line {
     @Attribute
     private int line_direction;
 
-    @SerializedName("include_macros")
-    public ArrayList<IncludeMacro> include_Include_macros;
+    @SerializedName("include_macro")
+    public ArrayList<IncludeMacro> include_macro;
 }

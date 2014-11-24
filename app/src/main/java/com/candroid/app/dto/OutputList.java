@@ -28,7 +28,7 @@ public class OutputList {
     @SerializedName("include_list")
     public ArrayList<ListItem> include_list;
 
-    @SerializedName("include_macros")
-    public ArrayList<IncludeMacro> include_Include_macros;
+    @SerializedName("include_macro")
+    public ArrayList<IncludeMacro> include_macro;
 
 }

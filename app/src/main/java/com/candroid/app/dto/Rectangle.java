@@ -28,7 +28,7 @@ public class Rectangle {
     @Attribute
     private int fill_attributes;
 
-    @SerializedName("include_macros")
-    public ArrayList<IncludeMacro> include_Include_macros;
+    @SerializedName("include_macro")
+    public ArrayList<IncludeMacro> include_macro;
 
 }

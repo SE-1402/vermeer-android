@@ -49,6 +49,6 @@ public class LinearBarGraph {
     @Attribute
     private int target_value;
 
-    @SerializedName("include_macros")
-    public ArrayList<IncludeMacro> include_Include_macros;
+    @SerializedName("include_macro")
+    public ArrayList<IncludeMacro> include_macro;
 }

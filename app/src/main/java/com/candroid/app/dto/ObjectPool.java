@@ -107,29 +107,29 @@ public class ObjectPool {
     @SerializedName("string_variable")
     public ArrayList<StringVariable> string_variable;
 
-    @ElementList(entry = "font_attributes", inline = true)
-    @SerializedName("font_attributes")
-    public ArrayList<FontAttributes> font_attributes;
+    @ElementList(entry = "font_attribute", inline = true)
+    @SerializedName("font_attribute")
+    public ArrayList<FontAttributes> font_attribute;
 
-    @ElementList(entry = "line_attributes", inline = true)
-    @SerializedName("line_attributes")
-    public ArrayList<LineAttributes> line_attributes;
+    @ElementList(entry = "line_attribute", inline = true)
+    @SerializedName("line_attribute")
+    public ArrayList<LineAttributes> line_attribute;
 
-    @ElementList(entry = "fill_attributes", inline = true)
-    @SerializedName("fill_attributes")
-    public ArrayList<FillAttributes> fill_attributes;
+    @ElementList(entry = "fill_attribute", inline = true)
+    @SerializedName("fill_attribute")
+    public ArrayList<FillAttributes> fill_attribute;
 
-    @ElementList(entry = "input_attributes", inline = true)
-    @SerializedName("input_attributes")
-    public ArrayList<InputAttributes> input_attributes;
+    @ElementList(entry = "input_attribute", inline = true)
+    @SerializedName("input_attribute")
+    public ArrayList<InputAttributes> input_attribute;
 
     @ElementList(entry = "object_pointer", inline = true)
     @SerializedName("object_pointer")
     public ArrayList<ObjectPointer> object_pointer;
 
-    @ElementList(entry = "macro", inline = true)
-    @SerializedName("macro")
-    public ArrayList<IncludeMacro> includeMacro;
+    @ElementList(entry = "include_macro", inline = true)
+    @SerializedName("include_macro")
+    public ArrayList<IncludeMacro> include_macro;
 
     public ObjectPool() {
 

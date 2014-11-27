@@ -29,5 +29,5 @@ public class Container {
 
     @ElementList(name="include_macro", required=false, inline=true)
     @SerializedName("include_macro")
-    public ArrayList<IncludeObject> include_macro;
+    public ArrayList<IncludeMacro> include_macro;
 }

@@ -23,7 +23,7 @@ public class InputString {
     public int background_colour;
 
     @Attribute
-    public int font_attributes;
+    public int font_attribute;
 
     @Attribute
     public int input_attributes;

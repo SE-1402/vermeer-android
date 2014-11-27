@@ -7,12 +7,12 @@ import org.simpleframework.xml.Root;
 public class StringVariable {
 
     @Attribute
-    private int id;
+    public int id;
 
     @Attribute
-    private int length;
+    public int length;
 
     @Attribute
-    private String value;
+    public String value;
 
 }

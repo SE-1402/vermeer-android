@@ -7,9 +7,9 @@ import org.simpleframework.xml.Root;
 public class NumberVariable {
 
     @Attribute
-    private int id;
+    public int id;
 
     @Attribute
-    private int value;
+    public int value;
 
 }

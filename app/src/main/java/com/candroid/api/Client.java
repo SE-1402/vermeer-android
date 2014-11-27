@@ -7,6 +7,7 @@ import android.util.Log;
 import com.candroid.app.BuildConfig;
 import com.candroid.app.activities.MainActivity;
 import com.candroid.app.dto.ObjectPool;
+import com.candroid.app.dto.commands.Command;
 import com.google.gson.FieldNamingPolicy;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -25,7 +26,10 @@ public class Client {
     private Gson gson;
 
     public Client (Activity activity){
-        gson = new GsonBuilder().setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES).create();
+        gson = new GsonBuilder()
+                .setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES)
+                .registerTypeAdapter(Command.class, new CommandDeserializer())
+                .create();
         this.activity = activity;
     }
 

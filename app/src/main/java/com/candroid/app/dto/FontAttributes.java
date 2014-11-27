@@ -11,19 +11,19 @@ import java.util.ArrayList;
 public class FontAttributes {
 
     @Attribute
-    private int id;
+    public int id;
 
     @Attribute
-    private int font_colour;
+    public int font_colour;
 
     @Attribute
-    private int font_size;
+    public int font_size;
 
     @Attribute
-    private int font_type;
+    public int font_type;
 
     @Attribute
-    private int font_style;
+    public int font_style;
 
     @SerializedName("include_macro")
     public ArrayList<IncludeMacro> include_macro;

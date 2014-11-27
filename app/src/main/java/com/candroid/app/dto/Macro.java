@@ -1,5 +1,7 @@
 package com.candroid.app.dto;
 
+import com.candroid.app.dto.commands.Command;
+
 import org.simpleframework.xml.Attribute;
 import org.simpleframework.xml.Root;
 

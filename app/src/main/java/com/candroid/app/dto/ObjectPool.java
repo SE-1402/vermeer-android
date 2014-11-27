@@ -127,9 +127,9 @@ public class ObjectPool {
     @SerializedName("object_pointer")
     public ArrayList<ObjectPointer> object_pointer;
 
-    @ElementList(entry = "include_macro", inline = true)
-    @SerializedName("include_macro")
-    public ArrayList<IncludeMacro> include_macro;
+    @ElementList(entry = "macro", inline = true)
+    @SerializedName("macro")
+    public ArrayList<Macro> macro;
 
     public ObjectPool() {
 

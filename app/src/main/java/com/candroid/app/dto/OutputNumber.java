@@ -23,7 +23,7 @@ public class OutputNumber {
     public int background_colour;
 
     @Attribute
-    public int font_attributes;
+    public int font_attribute;
 
     @Attribute
     public int options;

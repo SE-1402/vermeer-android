@@ -11,16 +11,16 @@ import java.util.ArrayList;
 public class FillAttributes {
 
     @Attribute
-    private int id;
+    public int id;
 
     @Attribute
-    private int fill_type;
+    public int fill_type;
 
     @Attribute
-    private int fill_colour;
+    public int fill_colour;
 
     @Attribute
-    private int font_pattern;
+    public int font_pattern;
 
     @SerializedName("include_macro")
     public ArrayList<IncludeMacro> include_macro;

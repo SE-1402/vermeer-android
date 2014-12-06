@@ -1,5 +1,6 @@
 package com.candroid.app.activities;
 
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -42,8 +43,11 @@ public class MainActivity extends FragmentActivity implements DataMaskFragment.O
         Crashlytics.start(this);
         setContentView(R.layout.activity_main);
         layout = (RelativeLayout) findViewById(R.id.layout);
-        FlatUI.setDefaultTheme(FlatUI.DARK);
-        FlatUI.setActionBarTheme(this, FlatUI.DARK, false, false);
+        FlatUI.initDefaultValues(this);
+        FlatUI.setDefaultTheme(FlatUI.DEEP);
+        if (getActionBar() != null) {
+            getActionBar().setBackgroundDrawable(FlatUI.getActionBarDrawable(this, FlatUI.DEEP, false));
+        }
     }
 
     public void showFragment(ArrayList<Fragment> fragments, int fragmentIndex, boolean addToBackStack) {
@@ -97,6 +101,8 @@ public class MainActivity extends FragmentActivity implements DataMaskFragment.O
                     mockInitialData();
                 }
                 return true;
+            case R.id.action_graphics:
+                startActivity(new Intent(this, ShapeDrawingExampleActivity.class));
             default:
                 return super.onOptionsItemSelected(item);
         }

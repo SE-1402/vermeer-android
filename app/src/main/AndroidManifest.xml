@@ -2,7 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.candroid.app">
 
-    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:allowBackup="true"
@@ -12,6 +12,15 @@
         <activity
             android:name=".activities.MainActivity"
             android:label="@string/app_name"
+            android:screenOrientation="sensorLandscape"
+            android:theme="@style/AppTheme"/>
+        <activity
+            android:name=".activities.ShapeDrawingExampleActivity"
+            android:label="@string/title_activity_shape_drawing_example" />
+        <activity
+            android:name=".activities.SplashActivity"
+            android:label="@string/app_name"
+            android:theme="@style/SplashScreenTheme"
             android:screenOrientation="sensorLandscape">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -19,7 +28,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <meta-data android:name="com.crashlytics.ApiKey" android:value="d27cbe75e9c2ffbb0a53b82c5b8f9f963f222725"/>
+
+        <meta-data
+            android:name="com.crashlytics.ApiKey"
+            android:value="d27cbe75e9c2ffbb0a53b82c5b8f9f963f222725" />
     </application>
 
 </manifest>

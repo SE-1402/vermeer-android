@@ -5,5 +5,8 @@
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="title_activity_shape_drawing_example">ShapeDrawingExampleActivity</string>
+    <string name="title_activity_graphics">GraphicsActivity</string>
+    <string name="title_activity_login">LoginActivity</string>
 
 </resources>

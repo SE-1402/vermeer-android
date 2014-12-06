@@ -11,16 +11,16 @@ import java.util.ArrayList;
 public class LineAttributes {
 
     @Attribute
-    private int id;
+    public int id;
 
     @Attribute
-    private int line_colour;
+    public int line_colour;
 
     @Attribute
-    private int line_width;
+    public int line_width;
 
     @Attribute
-    private int line_art;
+    public int line_art;
 
     @SerializedName("include_macro")
     public ArrayList<IncludeMacro> include_macro;

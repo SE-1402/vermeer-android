@@ -25,6 +25,7 @@ import com.candroid.app.dto.ArchedBarGraph;
 import com.candroid.app.dto.Container;
 import com.candroid.app.dto.DataMask;
 import com.candroid.app.dto.Ellipse;
+import com.candroid.app.dto.FillAttributes;
 import com.candroid.app.dto.FontAttributes;
 import com.candroid.app.dto.IncludeMacro;
 import com.candroid.app.dto.IncludeObject;
@@ -34,6 +35,7 @@ import com.candroid.app.dto.InputNumber;
 import com.candroid.app.dto.InputString;
 import com.candroid.app.dto.Key;
 import com.candroid.app.dto.Line;
+import com.candroid.app.dto.LineAttributes;
 import com.candroid.app.dto.LinearBarGraph;
 import com.candroid.app.dto.Macro;
 import com.candroid.app.dto.Meter;
@@ -50,6 +52,8 @@ import com.candroid.app.dto.SoftKeyMask;
 import com.candroid.app.dto.StringVariable;
 import com.candroid.app.dto.commands.ChangeActiveMask;
 import com.candroid.app.views.DataMaskFragment;
+import com.candroid.app.views.LineDrawable;
+import com.candroid.app.views.RectangleDrawable;
 import com.candroid.app.views.SoftKeyMaskFragment;
 
 import java.util.ArrayList;
@@ -160,7 +164,7 @@ public class UIBuilder {
         // B.10.3 Rectangle Object:
         if (objectPool.rectangle != null) {
             for (Rectangle rectangle : objectPool.rectangle) {
-                createRectangle(rectangle);
+                createRectangle(objectPool, rectangle);
             }
         }
         // B.10.4 Ellipse Object:
@@ -542,10 +546,28 @@ public class UIBuilder {
     }
 
     private void createLine(Line line) {
+        LineDrawable lineDrawable = new LineDrawable(context);
+        lineDrawable.setId(line.id);
+        viewsList.add(lineDrawable);
         // TODO: Line
     }
 
-    private void createRectangle(Rectangle rectangle) {
+    private void createRectangle(ObjectPool objectPool, Rectangle rectangle) {
+        LineAttributes lineAttribute = null;
+        for (LineAttributes lineAttributes : objectPool.line_attribute) {
+            if (lineAttributes.id == rectangle.line_attributes) {
+                lineAttribute = lineAttributes;
+            }
+        }
+        FillAttributes fillAttribute = null;
+        for (FillAttributes fillAttributes : objectPool.fill_attribute) {
+            if (fillAttributes.id == rectangle.fill_attributes) {
+                fillAttribute = fillAttributes;
+            }
+        }
+        RectangleDrawable rectangleDrawable = new RectangleDrawable(context, lineAttribute, fillAttribute);
+        rectangleDrawable.setId(rectangle.id);
+        viewsList.add(rectangleDrawable);
         // TODO: Rectangle
     }
 
@@ -586,12 +608,14 @@ public class UIBuilder {
         if (dataMask.include_object != null) {
             for (IncludeObject includeObject : dataMask.include_object) {
                 for (View container : viewsList) {
-                    if (container.getTag().equals(includeObject.id)) {
+                    if (container.getId() == includeObject.id) {
                         RelativeLayout.LayoutParams paramsContainer = (RelativeLayout.LayoutParams) container.getLayoutParams();
                         // TODO: Not correct?? Double check
-                        paramsContainer.leftMargin = includeObject.pos_x;
-                        paramsContainer.topMargin = includeObject.pos_y;
-                        container.setLayoutParams(paramsContainer);
+                        if (paramsContainer != null) {
+                            paramsContainer.leftMargin = includeObject.pos_x;
+                            paramsContainer.topMargin = includeObject.pos_y;
+                            container.setLayoutParams(paramsContainer);
+                        }
                         dataMaskFragment.addIncludeObject(container);
                     }
                 }
@@ -626,7 +650,7 @@ public class UIBuilder {
         if (container.include_object != null) {
             for (IncludeObject includeObject : container.include_object) {
                 for (View viewItem : viewsList) {
-                    if (viewItem.getTag().equals(includeObject.id)) {
+                    if (viewItem.getId() == includeObject.id) {
                         RelativeLayout.LayoutParams params = (RelativeLayout.LayoutParams) viewItem.getLayoutParams();
                         // TODO: does this move other items around? I believe so...
                         params.leftMargin = includeObject.pos_x;
@@ -665,7 +689,7 @@ public class UIBuilder {
         if (softKeyMask.include_object != null) {
             for (IncludeObject includeObject : softKeyMask.include_object) {
                 for (View key : viewsList) {
-                    if (key.getTag().equals(includeObject.id)) {
+                    if (key.getId() == includeObject.id) {
                         softKeyMaskFragment.addIncludeObject(key);
                     }
                 }
@@ -743,13 +767,15 @@ public class UIBuilder {
      */
     private View.OnClickListener setMacro(final Macro macro) {
         View.OnClickListener command = null;
-        if (macro.command.command_type == 173) {
-            command = new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    setDataMask(((ChangeActiveMask) macro.command).new_active_mask_object_id);
-                }
-            };
+        if (macro != null && macro.command != null) {
+            if (macro.command.command_type == 173) {
+                command = new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        setDataMask(((ChangeActiveMask) macro.command).new_active_mask_object_id);
+                    }
+                };
+            }
         }
         return command;
     }

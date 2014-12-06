@@ -11,22 +11,22 @@ import java.util.ArrayList;
 public class Rectangle {
 
     @Attribute
-    private int id;
+    public int id;
 
     @Attribute
-    private int line_attributes;
+    public int line_attributes;
 
     @Attribute
-    private int width;
+    public int width;
 
     @Attribute
-    private int height;
+    public int height;
 
     @Attribute
-    private int line_suppression;
+    public int line_suppression;
 
     @Attribute
-    private int fill_attributes;
+    public int fill_attributes;
 
     @SerializedName("include_macro")
     public ArrayList<IncludeMacro> include_macro;

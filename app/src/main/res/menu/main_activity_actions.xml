@@ -3,6 +3,11 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
+        android:id="@+id/action_graphics"
+        android:showAsAction="always"
+        android:title="Test Graphics" />
+
+    <item
         android:id="@+id/action_start"
         android:showAsAction="always"
         android:title="Start" />

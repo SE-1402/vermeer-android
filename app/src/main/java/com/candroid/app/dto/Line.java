@@ -11,19 +11,19 @@ import java.util.ArrayList;
 public class Line {
 
     @Attribute
-    private int id;
+    public int id;
 
     @Attribute
-    private int line_attributes;
+    public int line_attributes;
 
     @Attribute
-    private int width;
+    public int width;
 
     @Attribute
-    private int height;
+    public int height;
 
     @Attribute
-    private int line_direction;
+    public int line_direction;
 
     @SerializedName("include_macro")
     public ArrayList<IncludeMacro> include_macro;

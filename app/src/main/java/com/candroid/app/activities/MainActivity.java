@@ -44,9 +44,9 @@ public class MainActivity extends FragmentActivity implements DataMaskFragment.O
         setContentView(R.layout.activity_main);
         layout = (RelativeLayout) findViewById(R.id.layout);
         FlatUI.initDefaultValues(this);
-        FlatUI.setDefaultTheme(FlatUI.DEEP);
+        FlatUI.setDefaultTheme(FlatUI.GRASS);
         if (getActionBar() != null) {
-            getActionBar().setBackgroundDrawable(FlatUI.getActionBarDrawable(this, FlatUI.DEEP, false));
+            getActionBar().setBackgroundDrawable(FlatUI.getActionBarDrawable(this, FlatUI.GRASS, false));
         }
     }
 
@@ -144,7 +144,7 @@ public class MainActivity extends FragmentActivity implements DataMaskFragment.O
             // Set Current Masks
             builder.setDataMask(objectPool.working_set.active_mask);
             // TODO: Bad idea to hardcode this value:
-            builder.setSoftKeyMaskLeft(objectPool.soft_key_mask.get(0).id);
+            builder.setSoftKeyMaskRight(objectPool.soft_key_mask.get(0).id);
         } catch (Exception e) {
             e.printStackTrace();
         }

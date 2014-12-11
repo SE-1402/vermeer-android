@@ -439,7 +439,7 @@ public class UIBuilder {
         if (options.substring(2, 3).equals("1")) {
             // TODO: Leading Zeros
         }
-        if (inputNumber.variable_reference > 0 && inputNumber.variable_reference < 66535) {
+        if (inputNumber.variable_reference >= 0 && inputNumber.variable_reference < 66535) {
             for (NumberVariable numberVariable : objectPool.number_variable) {
                 if (numberVariable.id == inputNumber.id) {
                     editText.setText(String.valueOf(numberVariable.value));
